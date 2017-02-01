@@ -1,0 +1,5 @@
+* BAC graphs
+  #+BEGIN_SRC sh
+    ~/work/potato/scripts/sam-to-R.py -m 1000 -i 99.98 falcon <(samtools view falcon.2.sorted.bam)
+  #+END_SRC
+
