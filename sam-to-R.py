@@ -63,6 +63,7 @@ args = parser.parse_args()
 names = args.names.split(",")
 length = args.ref_length
 lanes = []
+lanesy = []
 lanelens = []
 
 if len(names) < len(args.sorted_sam_file):
@@ -70,6 +71,7 @@ if len(names) < len(args.sorted_sam_file):
 
 n = 0
 minlane = 0
+nexty = 0
 for sam_file in args.sorted_sam_file:
     samf = open(sam_file)
     reflengths = {}
@@ -111,15 +113,18 @@ for sam_file in args.sorted_sam_file:
                 if not inserted:
                     lanes.append([(int(pos),int(pos)+aln_len,n)])
                     lanelens.append(reflengths[rname])
+                    lanesy.append(nexty)
+                    nexty += 1
     minlane = len(lanes)
     samf.close()
     n += 1
+    nexty += 0.5
 
 sys.stdout.write("{:s}\t{:s}\t{:s}\t{:s}\n".format("track","file","beg","end"))
 
-y = 0
+n = 0
 for lane,lanelen in zip(lanes,lanelens):
-    sys.stdout.write("{:d}\t{:s}\t{:d}\t{:d}\n".format(y, "space", 1, lanelen))
+    sys.stdout.write("{:.1f}\t{:s}\t{:d}\t{:d}\n".format(lanesy[n], "space", 1, lanelen))
     for aln in lane:
         # if aln[2] in reflengths:
         #     reflength = reflengths[aln[2]]
@@ -130,10 +135,10 @@ for lane,lanelen in zip(lanes,lanelens):
         #                      .format(aln[2]))
         #     continue
         
-        sys.stdout.write("{:d}\t{:s}\t{:d}\t{:d}\n".format(y, names[aln[2]], aln[0], aln[1]))
+        sys.stdout.write("{:.1f}\t{:s}\t{:d}\t{:d}\n".format(lanesy[n], names[aln[2]], aln[0], aln[1]))
         # sys.stdout.write("    <rect x=\"{:f}\" y=\"{:d}\" width=\"{:f}\" height=\"10\" />\n"
         #                  .format((float(aln[0])/reflength)*100,
         #                          y,
         #                          (float(aln[1])/reflength)*100))
-    y += 1
+    n += 1
 

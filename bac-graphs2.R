@@ -40,15 +40,15 @@ con <- read.table(conf, header=TRUE)
 conorder <- unlist(strsplit(conorder, split=","))
 con$file <- factor(con$file, levels=c(conorder, "space"))
 
-plotmargin <- unit(c(0,6,0,6), "mm")
+plotmargin <- unit(c(0,0,0,4), "mm")
 
-conp <- ggplot(con, aes(ymin=track+0.2, ymax=track+0.8, xmin=beg, xmax=end, fill=file)) +
+conp <- ggplot(con, aes(ymin=track+0.1, ymax=track+0.9, xmin=beg, xmax=end, fill=file)) +
     guides(fill=FALSE) +
     xlab(NULL) +
     ylab(NULL) +
     scale_x_continuous(labels=NULL) +
-    scale_y_continuous(breaks=c(1,2.5,3.5),
-                       labels=c("Supernova", "Falcon", "Discovar")) +
+    scale_y_continuous(breaks=c(0.5,2.0,4.5),
+                       labels=c("Discovar", "Falcon", "Supernova")) +
     scale_fill_manual(values=c(gg_colour_hue(3),"light grey")) +
     theme(axis.ticks.x = element_blank(),
           axis.ticks.y = element_blank(),
@@ -61,9 +61,9 @@ dvcmax <- 1000
 ## dvc[dvc$cov > dvcmax,]$cov <- dvcmax
 dvcp <- ggplot(dvc, aes(x=pos, ymin=0, ymax=cov)) +
     xlab(NULL) +
-    ylab("Pair end") +
+    ylab("Paired end") +
     scale_x_continuous(labels=NULL) +
-    scale_y_log10() +
+    scale_y_log10(breaks=c(1,10,100,1000)) +
     theme(axis.ticks.x = element_blank(),
           axis.text.y = element_text(size=8),
           axis.title.y = element_text(size=9,vjust=0.1),
@@ -116,6 +116,6 @@ dtcg <- ggplotGrob(dtcp)
 gcg <- ggplotGrob(gcp)
 cong <- ggplotGrob(conp)
 
-pdf(file=paste(output,".pdf"), height=3.5, width=12)
+pdf(file=sprintf("%s.pdf",output), height=4.5, width=12)
 grid.draw(rbind(cong, dvcg, mpcg, dtcg, gcg, size="last"))
 dev.off()
