@@ -3,3 +3,22 @@
     ~/work/potato/scripts/sam-to-R.py -m 1000 -i 99.98 falcon <(samtools view falcon.2.sorted.bam)
   #+END_SRC
 
+* Filtering coords
+  To get the bits of the assemblies that actually overlap the BAC
+
+#+BEGIN_SRC sh
+  awk 'BEGIN {lasts=""; lastm=0;} $5 > 4000 && $7 > 94 {if ($12 != lasts || $1 > lastm) {lasts = $12; lastm=$2; print $0;}}' \
+      discovar-mp-dt-bn.coords \
+      > discovar-mp-dt-bn.fcoords
+#+END_SRC
+
+  Make trim files for sequences in the trimmed fasta
+
+#+BEGIN_SRC sh
+  sort -n -k3,3 discovar-mp-dt-bn.fcoords \
+      | sort -s -k13 \
+      | sort -s -k12,12 \
+      | awk 'BEG {lastn="";lasts=0;laste=0;} {n=$13;if ($3<$4){s=$3;e=$4}else{s=$4;e=$3} if(lastn=="") {lastn=n;lasts=s;laste=e} else if (lastn!=n) {print lastn,lasts,laste; lastn=n;lasts=s;laste=e;} else if (s > laste+100) {print n,lasts,laste; lasts=s;laste=e} else {laste=e}} END {print lastn,lasts,laste}' \
+            > discovar-mp-dt-bn.scaftrim
+#+END_SRC
+
