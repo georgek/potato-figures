@@ -8,14 +8,14 @@ t <- read.table("../genes-table", header=TRUE)
 tm <- melt(t, id.vars="asm", variable.name="type", value.name="genes")
 
 p <- ggplot(tm, aes(x=asm, y=genes, fill=type)) +
-    xlab("Assembly") +
-    ylab("Number of genes") +
     scale_fill_discrete(name="Type",
                       labels=c("cegcom"="Cegma complete",
                           "cegpar"="Cegma partial",
                           "buscom"="Busco complete",
                           "buspar"="Busco partial",
                           "busmis"="Busco missing")) +
+    scale_x_discrete(name="Assembly") +
+    scale_y_continuous(name="Number of genes") +
     geom_bar(stat="identity", position="dodge") +
     geom_bar(stat="identity", position="dodge", colour="black", show_guide=FALSE) +
     theme(legend.position="bottom", legend.key.size=unit(3, "mm"),
