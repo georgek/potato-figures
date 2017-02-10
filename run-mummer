@@ -1,0 +1,76 @@
+#!/bin/bash
+
+name=$1
+i=$2
+l=$3
+
+echo "${name}: i${i}, l${l}"
+
+if [[ ! -s ${name}-i${i}-l${l}.delta ]]; then
+    echo "Filtering delta..."
+    delta-filter -q -r -i ${i} -l ${l} ${name}.delta \
+                 > ${name}-i${i}-l${l}.delta
+fi
+
+if [[ ! -s ${name}-i${i}-l${l}.coords ]]; then
+    echo "Making coords..."
+    show-coords -THrcl ${name}-i${i}-l${l}.delta \
+                > ${name}-i${i}-l${l}.coords
+fi
+
+if [[ ! -s ${name}.lengths ]]; then
+    echo "Getting scaffold lengths..."
+    fastalength ${name}.fasta | sort -k2,2 > ${name}.lengths
+fi
+
+for chr in {01..12}; do
+    echo "Doing chr ${chr}..."
+
+    # find scaffold order and orientation
+    awk '$12 == "ST4.03ch'${chr}'" {print $1,$2,$3,$4,$13;}' \
+        ${name}-i${i}-l${l}.coords \
+        | sort -n -k1,1 \
+        | sort -s -k5 \
+        | awk '
+BEGIN {
+   lastn=""; lastm=0; lastb=0; lastl=0;
+} 
+{
+   n=$5; s=$1; e=$2; p=(s+e)/2; b=e-s; l=$4-$3;
+   if (lastn=="") {
+      lastn=n; lastm=p; lastb=b; lastl=l;
+   } else if (lastn!=n) {
+      print lastn,int(lastm),lastl
+      lastn=n; lastm=p; lastb=b; lastl=l;
+   } else {
+      lastm=(lastm*lastb+p*b)/(lastb+b); lastb+=b; lastl+=l
+   }
+}
+END {
+   print lastn,int(lastm),lastl
+}
+' \
+        | sort -k1,1 \
+               > ${name}-chr${chr}-contigs-i${i}-l${l}.scaf-pos-orn
+
+    join -1 1 -2 2 \
+         ${name}-chr${chr}-contigs-i${i}-l${l}.scaf-pos-orn \
+         ${name}.lengths \
+        | sort -n -k2,2 \
+        | awk '{if ($3>0) {sign="+"} else {sign="-"} printf "%s\t%d\t%s\n", $1, $4, sign;}' \
+              > ${name}-chr${chr}-contigs-i${i}-l${l}.mumlist
+    
+    # awk '$12 == "ST4.03ch'${chr}'" {print $13;}' ${name}-i${i}-l${l}.coords \
+    #     | sort | uniq \
+    #                  > ${name}-chr${chr}-contigs-i${i}-l${l}.lst
+
+    # while read scaf; do
+    #     ~/code/tools/fasta-index-get.py ${name}.fasta "^${scaf}$"
+    # done < ${name}-chr${chr}-contigs-i${i}-l${l}.lst \
+    #     | sed 's/|/_/g' \
+    #           > ${name}-chr${chr}-contigs-i${i}-l${l}.fasta
+
+    mummerplot -t png -r ST4.03ch${chr} -p ${name}-i${i}-l${l}-${chr} \
+               ${name}-i${i}-l${l}.delta \
+               -Q ${name}-chr${chr}-contigs-i${i}-l${l}.mumlist
+done
