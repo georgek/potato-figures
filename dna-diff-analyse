@@ -1,0 +1,57 @@
+#!/bin/bash
+
+set -e
+
+SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
+
+if [[ $# -lt 4 ]]; then
+    echo "usage: dna-diff-analyse outputdir reference file1 name1 [file2 name2 ...]"
+    exit 1
+fi
+
+output=$1
+shift
+mkdir -p ${output}
+
+reference=$1
+echo "Processing reference: ${reference}..."
+shift
+for base in A C G T N; do
+    echo -ne "${base}\t"
+    awk '/^[^>]/' ${reference} \
+        | grep -Ho ${base} \
+        | wc -l
+done > ${output}/$(basename ${reference} .fasta).bases
+
+# empty files
+truncate -s 0 ${output}/indels
+truncate -s 0 ${output}/snps
+
+while [[ $# -gt 1 ]]; do
+    file=$1
+    name=$2
+    echo "Processing ${name}: ${file}..."
+    shift 2
+
+    # indels
+    grep -A 8 TotalGIndels ${file} \
+        | awk 'NR > 1 {split($3, a, "("); b = $1; if (substr(b,1,1) == ".") {print substr(b,2,1), -a[1]} else {print substr(b,1,1), a[1]}}' \
+              > ${output}/${name}-indels
+
+    awk -vname="${name}" 'FNR==NR {b[$1] = $2; next;} {print name, $1, $2, b[$1];}' \
+        ${output}/all.bases \
+        ${output}/${name}-indels \
+        >> ${output}/indels
+
+    # SNPs
+    grep -A 12 TotalGSNPs ${file} \
+        | awk 'NR > 1 {split($3, a, "("); split($1,t,""); print t[1]">"t[2], a[1];}' \
+              > ${output}/${name}-snps
+
+    awk -vname="${name}" '{print name, $1, $2;}' \
+        ${output}/${name}-snps \
+        >> ${output}/snps
+done
+
+echo "Running R..."
+${SCRIPTPATH}/dna-diff.R ${output} ${output}/indels ${output}/snps

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+coords=$1
+fasta=$2
+
+
+
+cut -f 5,12,13 ${coords} \
+    | sort -nr -k1,1 \
+    | sort -s -k2,2 \
+    | awk '$1 > 10000 {print $3}' \
+    | sort \
+    | uniq \
+          > $(basename ${coords} .1coords).1contigs
+
+while read seq; do
+    ~/code/tools/fasta-index-get.py ${fasta} "^${seq}$"
+done \
+    < $(basename ${coords} .1coords).1contigs \
+    > $(basename ${coords} .1coords).1contigs.fasta
