@@ -1,2 +1,5 @@
 *.pdf
 /.Rhistory
+/data/
+/output/
+/figures.html
