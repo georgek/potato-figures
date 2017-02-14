@@ -219,13 +219,13 @@ Make PDF versions:
 [[file:figures/pbcompplot.png]]
 
 * KAT plots
-
 ** Code
 
 For the KAT plots we have to count k-mers in the Discovar library reads and
 the assemblies. The read files =LIB12786_R1.fastq= and =LIB12786_R2.fastq=
-need to be in the =data= directory to run KAT as below. However, the matrix
-files have already been generated and put in the data directory.
+need to be in the =data= directory to run KAT as below. This generates three
+matrix files with filenames ending in =-main.mx=. KAT takes a long time and a
+lot of memory to run so we provide these matrix files.
 
 #+BEGIN_SRC sh :exports code
   for asm in discovar-contig falcon-pilon 10x; do
