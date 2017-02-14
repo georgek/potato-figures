@@ -13,18 +13,226 @@
 #+LANGUAGE: en
 #+SELECT_TAGS: export
 
+#+OPTIONS: html-link-use-abs-url:nil html-postamble:auto html-preamble:t
+#+OPTIONS: html-scripts:t html-style:t html5-fancy:nil tex:t
+#+CREATOR: <a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)
+#+HTML_CONTAINER: div
+#+HTML_DOCTYPE: xhtml-strict
+#+HTML_HEAD: <link href="css/bootstrap.min.css" rel="stylesheet">
+#+HTML_HEAD: <link href="css/syntax.css" rel="stylesheet">
+#+HTML_HEAD: <script src="js/jquery.js"></script>
+#+HTML_HEAD: <script src="js/bootstrap.min.js"></script>
+#+HTML_LINK_HOME:
+#+HTML_LINK_UP:
+#+HTML_MATHJAX:
+#+INFOJS_OPT:
+#+LATEX_HEADER:
+
+#+OPTIONS: texht:t
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS:
+#+LATEX_HEADER:
+#+LATEX_HEADER_EXTRA:
+
 This document contains all of the code needed to generate the figures for the
-potato paper from the raw data.
+potato paper from the raw data. It can be executed with org-mode to generate
+the figures automatically. The following org-mode settings are required:
+#+BEGIN_SRC elisp :exports code
+  ;;; use bash to evaluate shell code
+  (setq org-babel-sh-command "bash")
+
+  ;;; export with CSS classes instead of explicit colours
+  ;;; this uses the included CSS for syntax highlighting
+  ;;; instead of your own emacs colours
+  (setq org-html-htmlize-output-type 'css)
+  (setq org-html-htmlize-font-prefix "org-")
+  ;;; the same but with bootstrap export, requires `ox-twbs'
+  (setq org-twbs-htmlize-output-type 'css)
+  (setq org-twbs-htmlize-font-prefix "org-")
+#+END_SRC
+
+The code in this document will read input data from the data directory, make
+intermediate files in an output directory, and put the final figures in a
+figures directory.
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+  mkdir -p output figures
+#+END_SRC
 
 * Cumulative content
 
+These plots show the cumulative content of the assemblies as successively
+smaller contigs are added in. The table gives the names of the assemblies and
+the filenames we use for each. Much of the code in this section uses this
+table.
+
+#+tblname: filenames
+| Name                         | filename             |
+|------------------------------+----------------------|
+| Supernova + BioNano          | 10x-bn               |
+| Supernova                    | 10x                  |
+| Discovar                     | discovar-contig      |
+| Discovar + MP + DT + BioNano | discovar-mp-dt-bn    |
+| Discovar + MP + Dovetail     | discovar-mp-dt       |
+| Discovar + MP + DT + PBJelly | discovar-mp-dt-jelly |
+| Discovar + MP + BioNano      | discovar-mp-bn       |
+| Discovar + MP                | discovar-mp          |
+| Falcon + BioNano             | falcon-bn            |
+| Falcon + DT + BioNano        | falcon-dt-bn         |
+| Falcon + Dovetail            | falcon-dt            |
+| Falcon                       | falcon               |
+
+** Code
+
+First we calculate the lengths of the contigs/scaffolds in each assembly and
+sort in descending order of size.
+
+#+BEGIN_SRC sh :results output silent :exports code :var table=filenames :separator ,
+  #!/bin/bash
+  IFS=','
+  while read name filename; do
+      if [[ ! -s output/${filename}.length ]]; then
+          echo "Calculating lengths of ${filename}..."
+          gzip -cd data/${filename}.fasta.gz \
+              | awk '
+                    /^>/ {
+                      if (len) {
+                        print len, name
+                      }
+                      split($0,s," ")
+                      name=substr(s[1],2)
+                      len=0
+                      next
+                    }
+                    {
+                      len += length($0)
+                    } 
+                    END {
+                      if (len) {
+                        print len, name
+                      }
+                    }
+                    ' \
+                        | sort -nr -k1,1 \
+                               > output/${filename}.length
+      fi
+  done <<< "$table"
+#+END_SRC
+
+Now we calculate the data for the plot. The minimum length of contigs
+considered and the total length of all contigs of that size or bigger.
+
+#+BEGIN_SRC sh :results output silent :exports code :var table=filenames :separator ,
+  #!/bin/bash
+  IFS=','
+  while read name filename; do
+      if [[ ! -s output/${filename}.minlen-cumulative ]]; then
+          echo "Calculating cumulative lengths of ${filename}..."
+          awk '
+              BEGIN {
+                OFS="\t"
+                last = 0
+                sum = 0
+              } 
+              {
+                if($1 != last && last != 0) {
+                  print last, sum
+                }
+                last = $1
+                sum += $1
+              }
+              ' \
+                  output/${filename}.length \
+                  > output/${filename}.minlen-cumulative
+      fi
+  done <<< "$table"
+#+END_SRC
+
+Now we prepare the table for ggplot by concatenating the minlen-cumulative
+tables and putting the name of the assembly in the third column.
+
+#+BEGIN_SRC sh :results output silent :exports code :var table=filenames :separator ,
+  #!/bin/bash
+  IFS=','
+  while read name filename; do
+      awk -v OFS=',' -v fname="$filename" -v name="$name" \
+          '
+          {
+            print $1,$2,fname,name
+          }
+          ' \
+              output/${filename}.minlen-cumulative
+  done <<< "$table" \
+       > output/all-assemblies.minlen-cumulative
+#+END_SRC
+
+Now we can plot these lines using ggplot:
+
+#+INCLUDE: "~/work/potato/scripts/cumulative-content.R" src R
+
+Make PDF versions:
+
+#+BEGIN_SRC R :results output silent :exports code
+  source(file="cumulative-content.R")
+
+  pdf(file="figures/bigcompplot.pdf", width=5, height=5)
+  print(bigcompplot)
+  dev.off()
+
+  pdf(file="figures/dvcompplot.pdf", width=5, height=5)
+  print(dvcompplot)
+  dev.off()
+
+  pdf(file="figures/pbcompplot.pdf", width=5, height=5)
+  print(pbcompplot)
+  dev.off()
+
+  pdf(file="figures/all.pdf", width=15, height=5)
+  grid.draw(cbind(ggplotGrob(bigcompplot),
+                  ggplotGrob(dvcompplot),
+                  ggplotGrob(pbcompplot),
+                  size="last"))
+  dev.off()
+#+END_SRC
+
+** Plots
+
+#+BEGIN_SRC R :results output graphics :file figures/bigcompplot.png :width 500 :height 500 :exports results :cache yes
+  source(file="cumulative-content.R")
+  print(bigcompplot)
+#+END_SRC
+
+#+RESULTS[f009dcf707ee2ca01361b8d13cb6cab67ede2e1a]:
+[[file:figures/bigcompplot.png]]
+
+#+BEGIN_SRC R :results output graphics :file figures/dvcompplot.png :width 500 :height 500 :exports results :cache yes
+  source(file="cumulative-content.R")
+  print(dvcompplotwaxis)
+#+END_SRC
+
+#+RESULTS[aa1a6cf66be8279fe82bbabf45d2683693d7832b]:
+[[file:figures/dvcompplot.png]]
+
+#+BEGIN_SRC R :results output graphics :file figures/pbcompplot.png :width 500 :height 500 :exports results :cache yes
+  source(file="cumulative-content.R")
+  print(pbcompplotwaxis)
+#+END_SRC
+
+#+RESULTS[7596061d4673f3c8a66b958e046b4692fe0a439d]:
+[[file:figures/pbcompplot.png]]
+
 * KAT plots
+
+  
 
 * BAC with difficult region
 
 * Gene content
 
-#+BEGIN_SRC R
+#+BEGIN_SRC R :exports code
+  #!/usr/bin/env Rscript
+
   library("ggplot2")
   library("reshape2")
   library("grid")

@@ -1,5 +1,8 @@
+/auto/
 *.pdf
 /.Rhistory
 /data/
 /output/
+/figures/
 /figures.html
+/figures.tex
