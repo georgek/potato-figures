@@ -304,6 +304,22 @@ The PNG output from R does not look very good for some reason.
 
 * BAC with difficult region
 
+For the BAC plot we use a PacBio assembly of a BAC (labelled number 22). We
+have several tracks of data: three contig alignments, three read alignments,
+and a GC content and homopolymer track.
+
+** Contig alignment
+
+For the contig alignments we used bwa-mem.
+
+** Read alignment
+
+For the read alignment we use bowtie2.
+
+** GC content and homopolymers
+
+
+
 * Gene content
 
 #+BEGIN_SRC R :exports code
