@@ -28,11 +28,7 @@
 #+INFOJS_OPT:
 #+LATEX_HEADER:
 
-#+OPTIONS: texht:t
-#+LATEX_CLASS: article
-#+LATEX_CLASS_OPTIONS:
-#+LATEX_HEADER:
-#+LATEX_HEADER_EXTRA:
+* Introduction
 
 This document contains all of the code needed to generate the figures for the
 potato paper from the raw data. It can be executed with org-mode to generate
@@ -51,9 +47,9 @@ the figures automatically. The following org-mode settings are required:
   (setq org-twbs-htmlize-font-prefix "org-")
 #+END_SRC
 
-The code in this document will read input data from the data directory, make
-intermediate files in an output directory, and put the final figures in a
-figures directory.
+The code in this document will read input data from the =data= directory, make
+intermediate files in an =output= directory, and put the final figures in a
+=figures= directory.
 
 #+BEGIN_SRC sh :results output silent :exports code
   #!/bin/bash
@@ -149,7 +145,7 @@ considered and the total length of all contigs of that size or bigger.
   done <<< "$table"
 #+END_SRC
 
-Now we prepare the table for ggplot by concatenating the minlen-cumulative
+Now we prepare the table for ggplot by concatenating the =minlen-cumulative=
 tables and putting the name of the assembly in the third column.
 
 #+BEGIN_SRC sh :results output silent :exports code :var table=filenames :separator ,
@@ -224,7 +220,87 @@ Make PDF versions:
 
 * KAT plots
 
-  
+** Code
+
+For the KAT plots we have to count k-mers in the Discovar library reads and
+the assemblies. The read files =LIB12786_R1.fastq= and =LIB12786_R2.fastq=
+need to be in the =data= directory to run KAT as below. However, the matrix
+files have already been generated and put in the data directory.
+
+#+BEGIN_SRC sh :exports code
+  for asm in discovar-contig falcon-pilon 10x; do
+      kat comp -t 8 -o data/kat-comp-${asm} \
+          'data/LIB12786_R?.fastq' \
+          data/${asm}.fasta
+  done
+#+END_SRC  
+
+KAT comes with its own plotting tools using Python and matplotlib, but we use
+the ggplot version to match the other figures in the paper.
+
+#+INCLUDE: "~/work/potato/scripts/plot-comp.R" src R
+
+Make PDF versions:
+
+#+BEGIN_SRC R :results output silent :exports code
+  commandArgs <- function() c("data/kat-comp-discovar-contig-main.mx",
+                   "200", "0", "5", "PCR free", "Discovar")
+  source(file="plot-comp.R")
+
+  pdf(file="figures/kat-comp-discovar.pdf", width=5, height=4, onefile=TRUE)
+  print(p)
+  dev.off()
+
+  commandArgs <- function() c("data/kat-comp-falcon-pilon-main.mx",
+                   "200", "0", "5", "PCR free", "Falcon")
+  source(file="plot-comp.R")
+
+  pdf(file="figures/kat-comp-falcon.pdf", width=5, height=4, onefile=TRUE)
+  print(p)
+  dev.off()
+
+  commandArgs <- function() c("data/kat-comp-10x-main.mx",
+                   "200", "0", "5", "PCR free", "Supernova")
+  source(file="plot-comp.R")
+
+  pdf(file="figures/kat-comp-10x.pdf", width=5, height=4, onefile=TRUE)
+  print(p)
+  dev.off()
+#+END_SRC
+
+** Figures
+
+The PNG output from R does not look very good for some reason.
+
+#+BEGIN_SRC R :results output graphics :file figures/kat-comp-discovar.png :width 500 :height 400 :exports results :cache yes
+  commandArgs <- function() c("data/kat-comp-discovar-contig-main.mx",
+                              "200", "0", "5", "PCR free", "Discovar")
+  source(file="plot-comp.R")
+  print(p)
+#+END_SRC
+
+#+RESULTS[32137840f717255b2f052518ecf515d519ff97e8]:
+[[file:figures/kat-comp-discovar.png]]
+
+#+BEGIN_SRC R :results output graphics :file figures/kat-comp-falcon.png :width 500 :height 400 :exports results :cache yes
+  commandArgs <- function() c("data/kat-comp-falcon-pilon-main.mx",
+                              "200", "0", "5", "PCR free", "Falcon")
+  source(file="plot-comp.R")
+  print(p)
+#+END_SRC
+
+#+RESULTS[c9d7b7e74d0350603766dedd8e8e153404a12e7e]:
+[[file:figures/kat-comp-falcon.png]]
+
+#+BEGIN_SRC R :results output graphics :file figures/kat-comp-10x.png :width 500 :height 400 :exports results :cache yes
+  commandArgs <- function() c("data/kat-comp-10x-main.mx",
+                              "200", "0", "5", "PCR free", "Supernova")
+  source(file="plot-comp.R")
+  print(p)
+#+END_SRC
+
+#+RESULTS[6fdd7bd42b7f97cbd98fc31141e539780593c990]:
+[[file:figures/kat-comp-10x.png]]
 
 * BAC with difficult region
 
