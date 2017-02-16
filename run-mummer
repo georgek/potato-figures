@@ -60,16 +60,6 @@ END {
         | awk '{if ($3>0) {sign="+"} else {sign="-"} printf "%s\t%d\t%s\n", $1, $4, sign;}' \
               > ${name}-chr${chr}-contigs-i${i}-l${l}.mumlist
     
-    # awk '$12 == "ST4.03ch'${chr}'" {print $13;}' ${name}-i${i}-l${l}.coords \
-    #     | sort | uniq \
-    #                  > ${name}-chr${chr}-contigs-i${i}-l${l}.lst
-
-    # while read scaf; do
-    #     ~/code/tools/fasta-index-get.py ${name}.fasta "^${scaf}$"
-    # done < ${name}-chr${chr}-contigs-i${i}-l${l}.lst \
-    #     | sed 's/|/_/g' \
-    #           > ${name}-chr${chr}-contigs-i${i}-l${l}.fasta
-
     mummerplot -t png -r ST4.03ch${chr} -p ${name}-i${i}-l${l}-${chr} \
                ${name}-i${i}-l${l}.delta \
                -Q ${name}-chr${chr}-contigs-i${i}-l${l}.mumlist
