@@ -1,0 +1,11 @@
+#!/bin/bash
+
+fasta=$1
+output=$2
+
+samtools faidx ${fasta}
+bedtools makewindows -g ${fasta}.fai -w 100 > ${output}.100bps.bed
+bedtools nuc -fi ${fasta} -bed ${output}.100bps.bed > ${output}.gc.txt
+awk -v w=100 'BEGIN{FS="\t"; OFS="\t"} {if (FNR>1) {print $1,$2,$3,"GCpc_"w"bps",$5}}' \
+    ${output}.gc.txt > ${output}.gc.100bps.igv
+awk '{print $1,$2,$5}' ${output}.gc.100bps.igv > ${output}.gc.100bps

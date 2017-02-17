@@ -307,19 +307,177 @@ The PNG output from R does not look very good for some reason.
 
 For the BAC plot we use a PacBio assembly of a BAC (labelled number 22). We
 have several tracks of data: three contig alignments, three read alignments,
-and a GC content and homopolymer track.
+and a GC content and homopolymer track. The PacBio assembly of BAC 22 is
+contained in =bac22.fasta=.
 
 ** Contig alignment
 
-For the contig alignments we used bwa-mem.
+For the contig alignments we use bwa-mem.
+
+#+tblname: bac-contig-files
+| name      | filename        |
+|-----------+-----------------|
+| Supernova | 10x             |
+| Discovar  | discovar-contig |
+| Falcon    | falcon          |
+
+#+BEGIN_SRC sh :results output silent :exports code :var table=bac-contig-files :separator ,
+  #!/bin/bash
+  bwa index data/bac22.fasta
+  IFS=','
+  while read name filename; do
+      bwa mem data/bac22.fasta data/${filename}.fasta \
+          | samtools view -b - > data/pb-${filename}.bam
+      sambamba sort data/pb-${filename}.bam
+  done <<< "$table"
+#+END_SRC
+
+The =sam-to-R.py= script takes multiple SAM input files and outputs a table
+for plotting with ggplot. Optional parameters are =-m= for minimum length of
+the alignment and =-i= for minimum percent identity, both of which are
+calculated from the CIGAR string for each alignment in the SAM file. The first
+positional parameter provides a short name for each of the following
+alignments, which is embedded in the table, and then the alignment files
+follow. We use process substitution so we can use BAM files, ensuring that the
+SAM header is present by using the =-h= flag for samtools view.
+
+#+INCLUDE: "~/work/potato/scripts/sam-to-R.py" src python
+
+To generate the table for our three contig tracks we run:
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+  python sam-to-R.py \
+         -m 1000 -i 99.9 dv,fal,10x \
+         <(samtools view -h data/pb-discovar-contig.sorted.bam) \
+         <(samtools view -h data/pb-falcon.sorted.bam) \
+         <(samtools view -h data/pb-10x.sorted.bam) \
+         > output/pb-r-table
+#+END_SRC
 
 ** Read alignment
 
-For the read alignment we use bowtie2.
+For the read alignment we use bowtie2. The =ord= variable tells the aligner if
+the reads are in forward-reverse or reverse-forward order.
+
+#+tblname: bac-read-files
+| name      | filename | ord |
+|-----------+----------+-----|
+| Discovar  | discovar | fr  |
+| Mate pair | mp       | rf  |
+| Dovetail  | dovetail | fr  |
+
+We align each set of reads and suppress the unaligned reads to keep the file
+size smaller. Then they are filtered for reads with a high mapping quality and
+an edit distance with respect to the reference of no more than 1.
+
+#+BEGIN_SRC sh :results output silent :exports code :var table=bac-contig-files :separator ,
+  #!/bin/bash
+  bowtie2-build data/bac22.fasta data/bac22
+  IFS=','
+  while read name filename ord; do
+      bowtie2 -p 8 --no-unal --${ord} -x data/bac22 \
+              -1 data/${filename}-R1.fastq -2 data/${filename}-R2.fastq \
+          | samtools view -b - > data/${filename}-aln.bam
+      sambamba view -f bam -F "mapping_quality >= 30 and [NM] <= 1" \
+               data/${filename}-aln.bam \
+               > data/${filename}-aln-acc.bam
+  done <<< "$table"
+#+END_SRC
+
+For the paired-end (Discovar) we simply generate the depth at each reference
+position.
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+
+  sambamba sort data/discovar-aln-acc.bam
+  samtools depth -a data/discovar-aln-acc.sorted.bam \
+           > output/discovar-aln-acc.cov
+#+END_SRC
+
+For the mate pair and Dovetail we calculate the coverage the aligned
+fragments. First we need to sort the alignments by name to bring the pairs
+together:
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+  for filename in mp dovetail; do
+      samtools sort -n -O bam -T data/${filename}-aln-acc.sorted.name.bam \
+               <(samtools view -bh -F 1804 -q 1 data/${filename}-aln-acc.bam) \
+               > data/${filename}-aln.sorted.name.bam
+  done
+#+END_SRC
+
+Now we use bedtools to make a =bed= file with the physical fragments:
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+  for filename in mp dovetail; do
+      bamToBed -i data/${filename}-aln.sorted.name.bam -bedpe \
+          | cut -f 1,2,6 | sort -k1,1 > output/${filename}.phys.bed
+  done
+#+END_SRC
+
+And finally calculate the coverage at each reference position:
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+  for filename in mp dovetail; do
+      bedtools genomecov -d -i output/${filename}.phys.bed \
+               -g data/bac22.fasta.fai > output/${filename}.phys.cov
+  done
+#+END_SRC
 
 ** GC content and homopolymers
 
+For the GC content we use bedtools. We make 100bp windows and calculate the GC
+content in the windows.
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+
+  bedtools makewindows -g data/bac22.fasta.fai -w 100 \
+           > output/bac22.100bps.bed
+  bedtools nuc -fi data/bac22.fasta -bed output/bac22.100bps.bed \
+           > output/bac22.gc.txt
+  awk -v w=100 -vOFS='\t' -vFS='\t' 'NR > 1 {print $1,($2+$3)/2,$5}' \
+      output/bac22.gc.txt \
+      > output/bac22.gc.100bps
+#+END_SRC
+
+The homopolymers are calculated using the following python script:
+
+#+INCLUDE: "~/work/potato/scripts/homopolymers.py" src python
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+  python ~/code/tools/homopolymers.py data/bac22.fasta 4 \
+         > output/bac22.homopolymers.4
+#+END_SRC
+
 ** Figure
+
+Finally, after generating the data we can plot it all using ggplot.
+
+#+INCLUDE: "~/work/potato/scripts/bac-graphs2.R" src R
+
+#+BEGIN_SRC sh :results output silent :exports code
+  #!/bin/bash
+  ./bac-graphs2.R \
+      bac22 \
+      figures/bac22-pacbio \
+      output/discovar-aln-acc.cov \
+      output/mp.phys.cov \
+      output/dovetail.phys.cov \
+      output/bac22.gc.100bps \
+      output/bac22.homopolymers.4 \
+      output/pb-r-table \
+      10x,fal,dv
+#+END_SRC
+
+[[file:figures/bac22-pacbio.png]]
+
 * Gene content
 
 #+BEGIN_SRC R :exports code
