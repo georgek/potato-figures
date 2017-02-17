@@ -51,7 +51,8 @@ parser.add_argument("names", type=str,
 parser.add_argument("sorted_sam_file", type=str, nargs="+",
                     help="Sorted SAM files.")
 parser.add_argument("-l", "--ref_length", type=int,
-                    help="Length of reference (taken from SAM file if header is present.")
+                    help="Length of reference "
+                    "(taken from SAM file if header is present.")
 parser.add_argument("-m", "--min_length", type=int,
                     help="Minimum length of alignment to draw.")
 parser.add_argument("-i", "--min_identity", type=float,
@@ -89,17 +90,19 @@ for sam_file in args.sorted_sam_file:
                 split = line[3:].split()
                 
         else:
-            [qname,flag,rname,pos,mapq,cigar,rnext,pnext,tlen,seq,qual,opt] = line.split(None,11)
+            [qname,flag,rname,pos,mapq,cigar,rnext,pnext,tlen,seq,qual,opt] \
+                = line.split(None,11)
             aln_len = cigar_to_aln_len(cigar)
             opts = parse_opts(opt)
             if rname == "*":
                 continue
             if args.min_identity is not None and "NM" not in opts:
-                sys.exit("No NM value in SAM file, can't calculate percent identity.")
-            if (args.min_length is None or aln_len >= args.min_length) \
-               and (args.min_identity is None
-                    or (float(aln_len - opts["NM"])/aln_len)*100 >= args.min_identity):
-                # sys.stderr.write("Match id: {:f}\n".format((float(aln_len - opts["NM"])/aln_len)*100))
+                sys.exit("No NM value in SAM file, "
+                         "can't calculate percent identity.")
+            if ((args.min_length is None or aln_len >= args.min_length)
+                and (args.min_identity is None
+                     or ((float(aln_len - opts["NM"])/aln_len)*100
+                         >= args.min_identity))):
                 inserted = False
                 for lane in lanes[minlane:]:
                     if len(lane) == 0:
@@ -120,25 +123,15 @@ for sam_file in args.sorted_sam_file:
     n += 1
     nexty += 0.5
 
-sys.stdout.write("{:s}\t{:s}\t{:s}\t{:s}\n".format("track","file","beg","end"))
+sys.stdout.write("{:s}\t{:s}\t{:s}\t{:s}\n"
+                 .format("track","file","beg","end"))
 
 n = 0
 for lane,lanelen in zip(lanes,lanelens):
-    sys.stdout.write("{:.1f}\t{:s}\t{:d}\t{:d}\n".format(lanesy[n], "space", 1, lanelen))
+    sys.stdout.write("{:.1f}\t{:s}\t{:d}\t{:d}\n"
+                     .format(lanesy[n], "space", 1, lanelen))
     for aln in lane:
-        # if aln[2] in reflengths:
-        #     reflength = reflengths[aln[2]]
-        # elif args.ref_length is not None:
-        #     reflength = args.ref_length
-        # else:
-        #     sys.stderr.write("Error: {:s} not found in SAM header and --ref_length not given.\n"
-        #                      .format(aln[2]))
-        #     continue
-        
-        sys.stdout.write("{:.1f}\t{:s}\t{:d}\t{:d}\n".format(lanesy[n], names[aln[2]], aln[0], aln[1]))
-        # sys.stdout.write("    <rect x=\"{:f}\" y=\"{:d}\" width=\"{:f}\" height=\"10\" />\n"
-        #                  .format((float(aln[0])/reflength)*100,
-        #                          y,
-        #                          (float(aln[1])/reflength)*100))
+        sys.stdout.write("{:.1f}\t{:s}\t{:d}\t{:d}\n"
+                         .format(lanesy[n], names[aln[2]],
+                                 aln[0], aln[1]))
     n += 1
-
