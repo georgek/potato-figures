@@ -526,22 +526,21 @@ the orientation accordingly.
 ** Figures
 Here is a quick preview of the figures.
 
-#+BEGIN_SRC sh :results output verbatim raw :exports both :cache yes :var i=90 :var l=10000 :var table=synteny-names :separator ,
+#+BEGIN_SRC sh :results output silent :exports code :var i=90 :var l=10000 :var table=synteny-names :separator ,
   IFS=','
   while read name filename; do
       montage figures/mummerplot-${filename}-i${i}-l${l}-??.png \
+              -geometry 240x240+20+10 -tile 3x4 \
               figures/mummerplot-${filename}-i${i}-l${l}-all.png
-      echo "${name}"
+      echo "*** ${name}"
 
       echo "[[file:figures/mummerplot-${filename}-i${i}-l${l}-all.png]]"
   done <<< "$table"
 #+END_SRC
 
-#+RESULTS[5fa0bc5cb98b421f3d61ebce71a288ff79ca73d2]:
-Supernova + BioNano
+*** Supernova + BioNano
 [[file:figures/mummerplot-10x-bn-i90-l10000-all.png]]
-Discovar + MP + DT + BioNano
+*** Discovar + MP + DT + BioNano
 [[file:figures/mummerplot-discovar-mp-dt-bn-i90-l10000-all.png]]
-Falcon + DT + BioNano
+*** Falcon + DT + BioNano
 [[file:figures/mummerplot-falcon-dt-bn-2-i90-l10000-all.png]]
-
