@@ -1,10 +1,5 @@
 #!/usr/bin/env Rscript
 
-## gg_colour_hue <- function(n) {
-##     hues = seq(15, 375, length=n+1)[1:n]
-##     c(hcl(h=hues, l=60, c=110), hcl(h=hues, l=70, c=90))
-## }
-
 gg_colour_hue <- function(n) {
     hues = seq(15, 375, length=n+1)[1:n]
     c(hcl(h=hues, l=65, c=100))
@@ -13,6 +8,7 @@ gg_colour_hue <- function(n) {
 
 library("ggplot2")
 library("grid")
+library("Cairo")
 
 args <- commandArgs(TRUE)
 
@@ -35,14 +31,16 @@ dvc <- read.table(dvcf, col.names=c("chr", "pos", "cov"))
 mpc <- read.table(mpcf, col.names=c("chr", "pos", "cov"))
 dtc <- read.table(dtcf, col.names=c("chr", "pos", "cov"))
 gc  <- read.table(gcf,  col.names=c("chr", "pos", "gc"))
-hom <- read.table(homf, col.names=c("chr", "base", "length", "beg", "end"))
+hom <- read.table(homf, col.names=c("chr", "base", "length",
+                            "beg", "end"))
 con <- read.table(conf, header=TRUE)
 conorder <- unlist(strsplit(conorder, split=","))
 con$file <- factor(con$file, levels=c(conorder, "space"))
 
 plotmargin <- unit(c(0,0,0,4), "mm")
 
-conp <- ggplot(con, aes(ymin=track+0.1, ymax=track+0.9, xmin=beg, xmax=end, fill=file)) +
+conp <- ggplot(con, aes(ymin=track+0.1, ymax=track+0.9,
+                        xmin=beg, xmax=end, fill=file)) +
     guides(fill=FALSE) +
     xlab(NULL) +
     ylab(NULL) +
@@ -58,7 +56,6 @@ conp <- ggplot(con, aes(ymin=track+0.1, ymax=track+0.9, xmin=beg, xmax=end, fill
     ggtitle(expression(paste(italic("S. verrucosum"), " BAC 22")))
 
 dvcmax <- 1000
-## dvc[dvc$cov > dvcmax,]$cov <- dvcmax
 dvcp <- ggplot(dvc, aes(x=pos, ymin=0, ymax=cov)) +
     xlab(NULL) +
     ylab("Paired end") +
@@ -117,5 +114,10 @@ gcg <- ggplotGrob(gcp)
 cong <- ggplotGrob(conp)
 
 pdf(file=sprintf("%s.pdf",output), height=4.5, width=12)
+grid.draw(rbind(cong, dvcg, mpcg, dtcg, gcg, size="last"))
+dev.off()
+
+CairoPNG(file=sprintf("%s.png",output), height=4.5, width=12,
+    units="in", dpi=80)
 grid.draw(rbind(cong, dvcg, mpcg, dtcg, gcg, size="last"))
 dev.off()
