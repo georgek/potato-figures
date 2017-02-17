@@ -166,7 +166,7 @@ tables and putting the name of the assembly in the third column.
 
 Now we can plot these lines using ggplot:
 
-#+INCLUDE: "~/work/potato/scripts/cumulative-content.R" src R
+#+INCLUDE: "cumulative-content.R" src R
 
 Make PDF versions:
 
@@ -239,7 +239,7 @@ lot of memory to run so we provide these matrix files.
 KAT comes with its own plotting tools using Python and matplotlib, but we use
 the ggplot version to match the other figures in the paper.
 
-#+INCLUDE: "~/work/potato/scripts/plot-comp.R" src R
+#+INCLUDE: "plot-comp.R" src R
 
 Make PDF versions:
 
@@ -341,7 +341,7 @@ alignments, which is embedded in the table, and then the alignment files
 follow. We use process substitution so we can use BAM files, ensuring that the
 SAM header is present by using the =-h= flag for samtools view.
 
-#+INCLUDE: "~/work/potato/scripts/sam-to-R.py" src python
+#+INCLUDE: "sam-to-R.py" src python
 
 To generate the table for our three contig tracks we run:
 
@@ -448,7 +448,7 @@ content in the windows.
 
 The homopolymers are calculated using the following python script:
 
-#+INCLUDE: "~/work/potato/scripts/homopolymers.py" src python
+#+INCLUDE: "homopolymers.py" src python
 
 #+BEGIN_SRC sh :results output silent :exports code
   #!/bin/bash
@@ -460,7 +460,7 @@ The homopolymers are calculated using the following python script:
 
 Finally, after generating the data we can plot it all using ggplot.
 
-#+INCLUDE: "~/work/potato/scripts/bac-graphs2.R" src R
+#+INCLUDE: "bac-graphs2.R" src R
 
 #+BEGIN_SRC sh :results output silent :exports code
   #!/bin/bash
