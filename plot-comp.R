@@ -14,6 +14,7 @@ isReads <- TRUE
 
 library("reshape2")
 library("ggplot2")
+library("grid")
 
 ## returns list of n colours equally spaced in HSL, like ggplot default
 gg_color_hue <- function(n) {
@@ -60,6 +61,7 @@ if (minCov == 0) {
 }
 p <- p + coord_cartesian(xlim=c(0,maxMul))
 p <- p + coord_cartesian(ylim=c(0,peaky*1.1))
+
 p <- p + labs(title=sprintf("%s", genName),
               x="k-mer multiplicity", y="Number of distinct k-mers",
               fill="Coverage")

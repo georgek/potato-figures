@@ -1,0 +1,19 @@
+#!/bin/bash
+
+SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
+
+if [[ $# -lt 3 ]]; then
+    echo "usage: make-coverages blast_file min_percent_id output_directory"
+    exit 1
+fi
+
+blastf=$1
+percid=$2
+outputd=$3
+
+awk -v p="${percid}" '$9 >= p' ${blastf} \
+    | sort -n -k3,3 \
+    | sort -sn -k2,2 \
+    | sort -s -k1,1 \
+    | ${SCRIPTPATH}/transcript-coverage.py \
+          > ${outputd}/$(basename ${blastf} .blastn)-i${percid}.coverage

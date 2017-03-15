@@ -1,0 +1,37 @@
+#!/bin/bash
+
+set -e
+
+if [[ $# -lt 2 ]]; then
+    echo "usage: mummer2ggplot inputprefix outputdir"
+    exit 1
+fi
+
+inputprefix=$1
+outputdir=$2
+
+# make coords
+cat ${inputprefix}.[fr]plot \
+    | awk '/^[1-9]/' \
+    | awk '
+NR%2==1 {a=$1;b=$2} 
+NR%2==0 {if($2>b) {
+            print a,b,$1,$2,$3,"+"
+        }else{
+            print a,b,$1,$2,$3,"-"
+        }}' \
+    | sort -n \
+           > ${inputprefix}.ggplot
+
+# make ticks
+sed ':a;N;$!ba;s/\\\n//g' ${inputprefix}.gp \
+    | awk '/^set ytics/' \
+    | sed 's/set ytics (  //' \
+    | sed 's/ )//' \
+    | sed 's/,  /\n/g' \
+    | sed 's/ /,/' \
+    | awk '{gsub(/"/, "", $1); print $1,$2;}' \
+          > ${inputprefix}.asmticks
+
+Rscript mummerplot.R ${outputdir}/$(basename ${inputprefix}) \
+        ${inputprefix}.ggplot ${inputprefix}.asmticks

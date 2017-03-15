@@ -193,7 +193,7 @@ Make PDF versions:
   dev.off()
 #+END_SRC
 
-** Plots
+** Figures
 
 #+BEGIN_SRC R :results output graphics :file figures/bigcompplot.png :width 500 :height 500 :exports results :cache yes
   source(file="cumulative-content.R")
@@ -251,6 +251,7 @@ Make PDF versions:
   pdf(file="figures/kat-comp-discovar.pdf", width=5, height=4, onefile=TRUE)
   print(p)
   dev.off()
+  p1 <- p
 
   commandArgs <- function() c("data/kat-comp-falcon-pilon-main.mx",
                    "200", "0", "5", "PCR free", "Falcon")
@@ -259,6 +260,7 @@ Make PDF versions:
   pdf(file="figures/kat-comp-falcon.pdf", width=5, height=4, onefile=TRUE)
   print(p)
   dev.off()
+  p2 <- p
 
   commandArgs <- function() c("data/kat-comp-10x-main.mx",
                    "200", "0", "5", "PCR free", "Supernova")
@@ -266,6 +268,17 @@ Make PDF versions:
 
   pdf(file="figures/kat-comp-10x.pdf", width=5, height=4, onefile=TRUE)
   print(p)
+  dev.off()
+  p3 <- p
+
+  p2 <- p2 + scale_y_continuous(labels=NULL) + ylab(NULL)
+  p3 <- p3 + scale_y_continuous(labels=NULL) + ylab(NULL)
+
+  pdf(file="figures/kat-comp-all.pdf", width=15, height=5)
+  grid.draw(cbind(ggplotGrob(p1),
+                  ggplotGrob(p2),
+                  ggplotGrob(p3),
+                  size="last"))
   dev.off()
 #+END_SRC
 
@@ -480,6 +493,63 @@ Finally, after generating the data we can plot it all using ggplot.
 
 * Gene content
 
+#+tblname: gene-content-names
+| name                         | filename          |
+|------------------------------+-------------------|
+| Supernova + BioNano          | 10x-bn            |
+| Discovar + MP + DT + BioNano | discovar-mp-dt-bn |
+| Falcon + DT + BioNano        | falcon-dt-bn      |
+| Tuberosum reference          | tuberosum         |
+
+We align the transcripts of the /S. tuberosum/ genome to our assemblies using
+BLAST version 2.2.31. The transcripts were retrieved from here:
+[[http://solanaceae.plantbiology.msu.edu/data/PGSC_DM_v3.4_transcript-update.fasta.zip]]
+
+#+BEGIN_SRC bash :results output silent :exports code :var table=gene-content-names :separator ,
+  for asm in 10x-bn discovar-mp-dt-bn falcon-dt-bn; do
+      blastn -outfmt '6 qseqid qstart qend qlen sseqid sstart send slen pident length evalue' \
+             -evalue 1e-3 \
+             -subject ${asm}.fasta \
+             -query PGSC_DM_v3.4_transcript-update.fasta \
+             > ${asm}-transcripts.blastn
+  done
+#+END_SRC
+
+We can adjust the minimum percentage identity of BLAST alignments that we
+consider and calculate the percent coverage of each transcript in the
+alignment. We use the =transcript-coverage.py= script to calculate the percent
+coverage for a transcript:
+
+#+INCLUDE: "~/work/potato/scripts/transcript-coverage.py" src python
+
+This is run after filtering the alignments with awk and sorting by alignment
+start position:
+
+#+BEGIN_SRC bash :results output silent :exports code :var table=gene-content-names :separator ,
+  IFS=','
+  while read name filename; do
+      for i in {85..100}; do
+          ./make-coverages data/${filename}-transcripts.blastn ${i} output/
+      done
+  done <<EOF
+  ${table}
+  EOF
+#+END_SRC
+
+Now we can count the number of transcripts which appear with various
+thresholds:
+
+#+BEGIN_SRC bash :results output silent :exports code :var table=gene-content-names :separator ,
+  for filename in 10x-bn discovar-mp-dt-bn falcon-dt-bn tuberosum; do
+      for cov in $(seq 0.85 0.01 1.0); do
+          for i in {85..100}; do
+              num=$(awk -v c=${cov} '$4 >= c' output/${filename}-transcripts-i${i}.coverage | wc -l)
+              echo -ne "${filename}\t${cov}\t${i}\t${num}\n"
+          done
+      done
+  done > output/transcript-asm-cov-id-count-2
+#+END_SRC
+
 #+BEGIN_SRC R :exports code
   #!/usr/bin/env Rscript
 
@@ -662,13 +732,21 @@ the orientation accordingly.
   }
   ' \
               | sort -k1,1 \
-                     > output/${filename}-chr${chr}-contigs-i${i}-l${l}.scaf-pos-orn
+                     > \
+                     output/${filename}-chr${chr}-contigs-i${i}-l${l}.scaf-pos-orn
 
           join -1 1 -2 2 \
                output/${filename}-chr${chr}-contigs-i${i}-l${l}.scaf-pos-orn \
                <(sort -k2,2 output/${filename}.length) \
               | sort -n -k2,2 \
-              | awk '{if ($3>0) {sign="+"} else {sign="-"} printf "%s\t%d\t%s\n", $1, $4, sign;}' \
+              | awk '
+  {if ($3>0) {
+      sign="+"
+   } else {
+      sign="-"
+   }
+   printf "%s\t%d\t%s\n", $1, $4, sign;}
+  ' \
                     > output/${filename}-chr${chr}-contigs-i${i}-l${l}.mumlist
 
           mummerplot -t png -r ST4.03ch${chr} \
@@ -681,15 +759,41 @@ the orientation accordingly.
   done <<< "$table"
 #+END_SRC
 
-** Figures
-Here is a quick preview of the figures.
+For the rest of the paper we ggplot for the plots so we now convert the
+mummerplots to ggplot and plot them. The data is prepared with the following
+script:
 
-#+BEGIN_SRC sh :results output silent :exports code :var i=90 :var l=10000 :var table=synteny-names :separator ,
+#+INCLUDE: "~/work/potato/scripts/mummer2ggplot" src sh
+
+Where =mummerplot.R= is:
+
+#+INCLUDE: "~/work/potato/scripts/mummerplot.R" src R
+
+** Figures
+
+Convert all the figures to ggplot:
+
+#+BEGIN_SRC bash :results output silent :exports code :var i=90 :var l=10000 :var table=synteny-names :separator ,
   IFS=','
   while read name filename; do
-      montage figures/mummerplot-${filename}-i${i}-l${l}-??.png \
-              -geometry 240x240+20+10 -tile 3x4 \
-              figures/mummerplot-${filename}-i${i}-l${l}-all.png
+      for chr in {01..12}; do
+          ./mummer2ggplot \
+              output/mummerplot-${filename}-i${i}-l${l}-${chr} \
+              figures
+      done
+  done <<EOF
+  $table
+  EOF
+#+END_SRC
+
+Here is a quick preview of the figures.
+
+#+BEGIN_SRC bash :results output silent :exports code :var i=90 :var l=10000 :var table=synteny-names :separator ,
+  IFS=','
+  while read name filename; do
+      montage figures/mummerplot-${filename}-i${i}-l${l}-??-gg.png \
+              -geometry 240x240+10+5 -tile 3x4 \
+              figures/mummerplot-${filename}-i${i}-l${l}-all-gg.png
       echo "*** ${name}"
 
       echo "[[file:figures/mummerplot-${filename}-i${i}-l${l}-all.png]]"
@@ -697,8 +801,8 @@ Here is a quick preview of the figures.
 #+END_SRC
 
 *** Supernova + BioNano
-[[file:figures/mummerplot-10x-bn-i90-l10000-all.png]]
+[[file:figures/mummerplot-10x-bn-i90-l10000-all-gg.png]]
 *** Discovar + MP + DT + BioNano
-[[file:figures/mummerplot-discovar-mp-dt-bn-i90-l10000-all.png]]
+[[file:figures/mummerplot-discovar-mp-dt-bn-i90-l10000-all-gg.png]]
 *** Falcon + DT + BioNano
-[[file:figures/mummerplot-falcon-dt-bn-2-i90-l10000-all.png]]
+[[file:figures/mummerplot-falcon-dt-bn-2-i90-l10000-all-gg.png]]
