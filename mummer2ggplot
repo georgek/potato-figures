@@ -2,6 +2,10 @@
 
 set -e
 
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd`
+popd > /dev/null
+
 if [[ $# -lt 2 ]]; then
     echo "usage: mummer2ggplot inputprefix outputdir"
     exit 1
@@ -31,7 +35,16 @@ sed ':a;N;$!ba;s/\\\n//g' ${inputprefix}.gp \
     | sed 's/,  /\n/g' \
     | sed 's/ /,/' \
     | awk '{gsub(/"/, "", $1); print $1,$2;}' \
-          > ${inputprefix}.asmticks
+          > ${inputprefix}.yticks
 
-Rscript mummerplot.R ${outputdir}/$(basename ${inputprefix}) \
-        ${inputprefix}.ggplot ${inputprefix}.asmticks
+sed ':a;N;$!ba;s/\\\n//g' ${inputprefix}.gp \
+    | awk '/^set xtics/' \
+    | sed 's/set xtics rotate (  //' \
+    | sed 's/ )//' \
+    | sed 's/,  /\n/g' \
+    | sed 's/ /,/' \
+    | awk '{gsub(/"/, "", $1); print $1,$2;}' \
+          > ${inputprefix}.xticks
+
+Rscript ${SCRIPTPATH}/mummerplot.R ${outputdir}/$(basename ${inputprefix}) \
+        ${inputprefix}.ggplot ${inputprefix}.xticks ${inputprefix}.yticks
