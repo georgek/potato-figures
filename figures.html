@@ -1,0 +1,2093 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Figures for potato paper</title>
+<!-- 2017-03-09 Thu 10:28 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="George Kettleborough">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/syntax.css" rel="stylesheet">
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<style type="text/css">
+/* org mode styles on top of twbs */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-size: 18px;
+    margin-bottom: 105px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 101px;
+    background-color: #f5f5f5;
+}
+
+footer > div {
+    padding: 10px;
+}
+
+footer p {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#table-of-contents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+blockquote p {
+    font-size: 18px;
+}
+
+pre {
+    font-size: 16px;
+}
+
+.footpara {
+    display: inline-block;
+}
+
+figcaption {
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+/* from twbs docs */
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #A1283B;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #A1283B;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #A1283B;
+    background-color: transparent;
+    border-left: 2px solid #A1283B;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-docs-sidebar .nav .nav .nav {
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 40px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav .nav > li > a:focus {
+    padding-left: 39px;
+}
+.bs-docs-sidebar .nav .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
+    padding-left: 38px;
+    font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+</style>
+<script type="text/javascript">
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script>
+</head>
+<body>
+<div id="content" class="container">
+<div class="row"><div class="col-md-9"><h1 class="title">Figures for potato paper</h1>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This document contains all of the code needed to generate the figures for the
+potato paper from the raw data. It can be executed with org-mode to generate
+the figures automatically. The following org-mode settings are required:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-elisp"><span class="org-comment-delimiter">;;; </span><span class="org-comment">use bash to evaluate shell code</span>
+<span class="org-paren">(</span><span class="org-keyword">setq</span> org-babel-sh-command <span class="org-string">"bash"</span><span class="org-paren">)</span>
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">export with CSS classes instead of explicit colours</span>
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">this uses the included CSS for syntax highlighting</span>
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">instead of your own emacs colours</span>
+<span class="org-paren">(</span><span class="org-keyword">setq</span> org-html-htmlize-output-type 'css<span class="org-paren">)</span>
+<span class="org-paren">(</span><span class="org-keyword">setq</span> org-html-htmlize-font-prefix <span class="org-string">"org-"</span><span class="org-paren">)</span>
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">the same but with bootstrap export, requires `</span><span class="org-comment"><span class="org-constant">ox-twbs</span></span><span class="org-comment">'</span>
+<span class="org-paren">(</span><span class="org-keyword">setq</span> org-twbs-htmlize-output-type 'css<span class="org-paren">)</span>
+<span class="org-paren">(</span><span class="org-keyword">setq</span> org-twbs-htmlize-font-prefix <span class="org-string">"org-"</span><span class="org-paren">)</span>
+</pre>
+</div>
+
+<p>
+The code in this document will read input data from the <code>data</code> directory, make
+intermediate files in an <code>output</code> directory, and put the final figures in a
+<code>figures</code> directory.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+mkdir -p output figures
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Cumulative content</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+These plots show the cumulative content of the assemblies as successively
+smaller contigs are added in. The table gives the names of the assemblies and
+the filenames we use for each. Much of the code in this section uses this
+table. It is read into the code blocks line by line into the name and filename
+variables.
+</p>
+
+<table id="filenames" class="table table-striped table-bordered table-hover table-condensed">
+
+
+<colgroup>
+<col  class="left">
+
+<col  class="left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="text-left">name</th>
+<th scope="col" class="text-left">filename</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-left">Supernova + BioNano</td>
+<td class="text-left">10x-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Supernova</td>
+<td class="text-left">10x</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar</td>
+<td class="text-left">discovar-contig</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar + MP + DT + BioNano</td>
+<td class="text-left">discovar-mp-dt-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar + MP + Dovetail</td>
+<td class="text-left">discovar-mp-dt</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar + MP + DT + PBJelly</td>
+<td class="text-left">discovar-mp-dt-jelly</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar + MP + BioNano</td>
+<td class="text-left">discovar-mp-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar + MP</td>
+<td class="text-left">discovar-mp</td>
+</tr>
+
+<tr>
+<td class="text-left">Falcon + BioNano</td>
+<td class="text-left">falcon-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Falcon + DT + BioNano</td>
+<td class="text-left">falcon-dt-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Falcon + Dovetail</td>
+<td class="text-left">falcon-dt</td>
+</tr>
+
+<tr>
+<td class="text-left">Falcon</td>
+<td class="text-left">falcon</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Code</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+First we calculate the lengths of the contigs/scaffolds in each assembly and
+sort in descending order of size.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    <span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -s output/${<span class="org-variable-name">filename</span>}.length ]]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Calculating lengths of ${filename}..."</span>
+        gzip -cd data/${<span class="org-variable-name">filename</span>}.fasta.gz <span class="org-sh-escaped-newline">\</span>
+            | awk <span class="org-string">'</span>
+<span class="org-string">                  /^&gt;/ {</span>
+<span class="org-string">                    if (len) {</span>
+<span class="org-string">                      print len, name</span>
+<span class="org-string">                    }</span>
+<span class="org-string">                    split($0,s," ")</span>
+<span class="org-string">                    name=substr(s[1],2)</span>
+<span class="org-string">                    len=0</span>
+<span class="org-string">                    next</span>
+<span class="org-string">                  }</span>
+<span class="org-string">                  {</span>
+<span class="org-string">                    len += length($0)</span>
+<span class="org-string">                  } </span>
+<span class="org-string">                  END {</span>
+<span class="org-string">                    if (len) {</span>
+<span class="org-string">                      print len, name</span>
+<span class="org-string">                    }</span>
+<span class="org-string">                  }</span>
+<span class="org-string">                  '</span> <span class="org-sh-escaped-newline">\</span>
+                      | sort -nr -k1,1 <span class="org-sh-escaped-newline">\</span>
+                             &gt; output/${<span class="org-variable-name">filename</span>}.length
+    <span class="org-keyword">fi</span>
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+Now we calculate the data for the plot. The minimum length of contigs
+considered and the total length of all contigs of that size or bigger.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    <span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -s output/${<span class="org-variable-name">filename</span>}.minlen-cumulative ]]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Calculating cumulative lengths of ${filename}..."</span>
+        awk <span class="org-string">'</span>
+<span class="org-string">            BEGIN {</span>
+<span class="org-string">              OFS="\t"</span>
+<span class="org-string">              last = 0</span>
+<span class="org-string">              sum = 0</span>
+<span class="org-string">            } </span>
+<span class="org-string">            {</span>
+<span class="org-string">              if($1 != last &amp;&amp; last != 0) {</span>
+<span class="org-string">                print last, sum</span>
+<span class="org-string">              }</span>
+<span class="org-string">              last = $1</span>
+<span class="org-string">              sum += $1</span>
+<span class="org-string">            }</span>
+<span class="org-string">            '</span> <span class="org-sh-escaped-newline">\</span>
+                output/${<span class="org-variable-name">filename</span>}.length <span class="org-sh-escaped-newline">\</span>
+                &gt; output/${<span class="org-variable-name">filename</span>}.minlen-cumulative
+    <span class="org-keyword">fi</span>
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+Now we prepare the table for ggplot by concatenating the <code>minlen-cumulative</code>
+tables and putting the name of the assembly in the third column.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    awk -v <span class="org-variable-name">OFS</span>=<span class="org-string">','</span> -v <span class="org-variable-name">fname</span>=<span class="org-string">"$filename"</span> -v <span class="org-variable-name">name</span>=<span class="org-string">"$name"</span> <span class="org-sh-escaped-newline">\</span>
+        <span class="org-string">'</span>
+<span class="org-string">        {</span>
+<span class="org-string">          print $1,$2,fname,name</span>
+<span class="org-string">        }</span>
+<span class="org-string">        '</span> <span class="org-sh-escaped-newline">\</span>
+            output/${<span class="org-variable-name">filename</span>}.minlen-cumulative
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span> <span class="org-sh-escaped-newline">\</span>
+     &gt; output/all-assemblies.minlen-cumulative
+</pre>
+</div>
+
+<p>
+Now we can plot these lines using ggplot:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env Rscript</span>
+
+<span class="org-constant">library</span>(<span class="org-string">"ggplot2"</span>)
+<span class="org-constant">library</span>(<span class="org-string">"grid"</span>)
+<span class="org-constant">library</span>(<span class="org-string">"scales"</span>)
+
+<span class="org-function-name">reverselog_trans</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(base = exp(1)) {
+    <span class="org-function-name">trans</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x) -log(x, base)
+    <span class="org-function-name">inv</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(x) base^(-x)
+    trans_new(paste0(<span class="org-string">"reverselog-"</span>, format(base)), trans, inv, 
+              log_breaks(base = base), 
+              domain = c(1e-100, <span class="org-type">Inf</span>))
+}
+
+input <span class="org-constant">&lt;-</span> read.table(<span class="org-string">"output/all-assemblies.minlen-cumulative"</span>,
+                    sep=<span class="org-string">","</span>,
+                    col.names=c(<span class="org-string">"minlen"</span>, <span class="org-string">"cumulative"</span>, <span class="org-string">"fname"</span>, <span class="org-string">"name"</span>))
+
+<span class="org-comment-delimiter">## </span><span class="org-comment">"bigcomp" with the large assemblies</span>
+bigcomp <span class="org-constant">&lt;-</span> subset(input,
+                  fname <span class="org-ess-XopX">%in%</span> c(<span class="org-string">"10x-bn"</span>, <span class="org-string">"falcon-dt-bn"</span>,
+                               <span class="org-string">"discovar-mp-dt-bn"</span>))
+bigcomp$name <span class="org-constant">&lt;-</span> factor(bigcomp$name,
+                       levels=c(<span class="org-string">"Supernova + BioNano"</span>,
+                           <span class="org-string">"Falcon + DT + BioNano"</span>,
+                           <span class="org-string">"Discovar + MP + DT + BioNano"</span>))
+
+bigcompplot <span class="org-constant">&lt;-</span>
+    ggplot(bigcomp, aes(x=minlen, y=cumulative, colour=name)) +
+    scale_x_continuous(trans=reverselog_trans(10),
+                       breaks=c(10000000,1000000,100000,10000,1000),
+                       labels=c(<span class="org-string">"10Mbp"</span>, <span class="org-string">"1MBp"</span>, <span class="org-string">"100kbp"</span>, <span class="org-string">"10kbp"</span>, <span class="org-string">"1kbp"</span>)) +
+    scale_y_log10(limits=c(400000,800000000),
+                  breaks=c(800000000,100000000,10000000,1000000),
+                  labels=c(<span class="org-string">"800Mbp"</span>, <span class="org-string">"100Mbp"</span>, <span class="org-string">"10Mbp"</span>, <span class="org-string">"1Mbp"</span>)) +
+    xlab(<span class="org-string">"Minimal scaffold length"</span>) +
+    ylab(<span class="org-string">"Covered assembly length\n"</span>) +
+    ggtitle(<span class="org-string">"Comparison of potato assemblies"</span>) +
+    labs(colour=<span class="org-string">"Assembly"</span>) +
+    geom_line() +
+    theme(legend.justification=c(1,0),legend.position=c(1,0))
+
+<span class="org-comment-delimiter">## </span><span class="org-comment">discovar comp</span>
+dvcomp <span class="org-constant">&lt;-</span> subset(input,
+                 fname <span class="org-ess-XopX">%in%</span> c(<span class="org-string">"discovar-contig"</span>, <span class="org-string">"discovar-mp"</span>,
+                              <span class="org-string">"discovar-mp-bn"</span>, <span class="org-string">"discovar-mp-dt"</span>,
+                              <span class="org-string">"discovar-mp-dt-jelly"</span>,
+                              <span class="org-string">"discovar-mp-dt-bn"</span>))
+
+dvcompplot <span class="org-constant">&lt;-</span>
+    ggplot(dvcomp, aes(x=minlen, y=cumulative, colour=name)) +
+    scale_x_continuous(trans=reverselog_trans(10),
+                       breaks=c(10000000,1000000,100000,10000,1000),
+                       labels=c(<span class="org-string">"10Mbp"</span>, <span class="org-string">"1MBp"</span>, <span class="org-string">"100kbp"</span>, <span class="org-string">"10kbp"</span>, <span class="org-string">"1kbp"</span>)) +
+    scale_y_log10(limits=c(400000,800000000),
+                  breaks=c(800000000,100000000,10000000,1000000),
+                  labels=<span class="org-type">NULL</span>) +
+    xlab(<span class="org-string">"Minimal scaffold length"</span>) +
+    ylab(<span class="org-type">NULL</span>) +
+    ggtitle(<span class="org-string">"Comparison of potato Discovar assemblies"</span>) +
+    labs(colour=<span class="org-string">"Assembly"</span>) +
+    geom_line() +
+    theme(legend.justification=c(1,0),legend.position=c(1,0))
+
+dvcompplotwaxis <span class="org-constant">&lt;-</span> dvcompplot +
+    scale_y_log10(limits=c(400000,800000000),
+                  breaks=c(800000000,100000000,10000000,1000000),
+                  labels=c(<span class="org-string">"800Mbp"</span>, <span class="org-string">"100Mbp"</span>, <span class="org-string">"10Mbp"</span>, <span class="org-string">"1Mbp"</span>)) +
+    ylab(<span class="org-string">"Covered assembly length\n"</span>)
+
+<span class="org-comment-delimiter">## </span><span class="org-comment">pacbio comp</span>
+pbcomp <span class="org-constant">&lt;-</span> subset(input,
+                 fname <span class="org-ess-XopX">%in%</span> c(<span class="org-string">"falcon"</span>, <span class="org-string">"falcon-dt"</span>,
+                              <span class="org-string">"falcon-bn"</span>, <span class="org-string">"falcon-dt-bn"</span>))
+
+pbcompplot <span class="org-constant">&lt;-</span>
+    ggplot(pbcomp, aes(x=minlen, y=cumulative, colour=name)) +
+    scale_x_continuous(trans=reverselog_trans(10),
+                       breaks=c(10000000,1000000,100000,10000,1000),
+                       labels=c(<span class="org-string">"10Mbp"</span>, <span class="org-string">"1MBp"</span>, <span class="org-string">"100kbp"</span>, <span class="org-string">"10kbp"</span>, <span class="org-string">"1kbp"</span>)) +
+    scale_y_log10(limits=c(400000,800000000),
+                  breaks=c(800000000,100000000,10000000,1000000),
+                  labels=<span class="org-type">NULL</span>) +
+    xlab(<span class="org-string">"Minimal scaffold length"</span>) +
+    ylab(<span class="org-type">NULL</span>) +
+    ggtitle(<span class="org-string">"Comparison of potato Falcon assemblies"</span>) +
+    labs(colour=<span class="org-string">"Assembly"</span>) +
+    geom_line() +
+    theme(legend.justification=c(1,0),legend.position=c(1,0))
+
+pbcompplotwaxis <span class="org-constant">&lt;-</span> pbcompplot +
+    scale_y_log10(limits=c(400000,800000000),
+                  breaks=c(800000000,100000000,10000000,1000000),
+                  labels=c(<span class="org-string">"800Mbp"</span>, <span class="org-string">"100Mbp"</span>, <span class="org-string">"10Mbp"</span>, <span class="org-string">"1Mbp"</span>)) +
+    ylab(<span class="org-string">"Covered assembly length\n"</span>)
+</pre>
+</div>
+
+<p>
+Make PDF versions:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-constant">source</span>(file=<span class="org-string">"cumulative-content.R"</span>)
+
+pdf(file=<span class="org-string">"figures/bigcompplot.pdf"</span>, width=5, height=5)
+print(bigcompplot)
+dev.off()
+
+pdf(file=<span class="org-string">"figures/dvcompplot.pdf"</span>, width=5, height=5)
+print(dvcompplot)
+dev.off()
+
+pdf(file=<span class="org-string">"figures/pbcompplot.pdf"</span>, width=5, height=5)
+print(pbcompplot)
+dev.off()
+
+pdf(file=<span class="org-string">"figures/all.pdf"</span>, width=15, height=5)
+grid.draw(cbind(ggplotGrob(bigcompplot),
+                ggplotGrob(dvcompplot),
+                ggplotGrob(pbcompplot),
+                size=<span class="org-string">"last"</span>))
+dev.off()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Figures</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<figure>
+<p><img src="figures/bigcompplot.png" class="img-responsive" alt="bigcompplot.png">
+</p>
+</figure>
+
+
+<figure>
+<p><img src="figures/dvcompplot.png" class="img-responsive" alt="dvcompplot.png">
+</p>
+</figure>
+
+
+<figure>
+<p><img src="figures/pbcompplot.png" class="img-responsive" alt="pbcompplot.png">
+</p>
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> KAT plots</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Code</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+For the KAT plots we have to count k-mers in the Discovar library reads and
+the assemblies. The read files <code>LIB12786_R1.fastq</code> and <code>LIB12786_R2.fastq</code>
+need to be in the <code>data</code> directory to run KAT as below. This generates three
+matrix files with filenames ending in <code>-main.mx</code>. KAT takes a long time and a
+lot of memory to run so we provide these matrix files.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-keyword">for</span> asm<span class="org-keyword"> in</span> discovar-contig falcon-pilon 10x; <span class="org-keyword">do</span>
+    kat comp -t 8 -o data/kat-comp-${<span class="org-variable-name">asm</span>} <span class="org-sh-escaped-newline">\</span>
+        <span class="org-string">'data/LIB12786_R?.fastq'</span> <span class="org-sh-escaped-newline">\</span>
+        data/${<span class="org-variable-name">asm</span>}.fasta
+<span class="org-keyword">done</span>
+</pre>
+</div>
+
+<p>
+KAT comes with its own plotting tools using Python and matplotlib, but we use
+the ggplot version to match the other figures in the paper.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env Rscript</span>
+
+args <span class="org-constant">&lt;-</span> commandArgs()
+
+matrixFile <span class="org-constant">&lt;-</span> args[1]
+maxMul <span class="org-constant">&lt;-</span> as.integer(args[2])
+minCov <span class="org-constant">&lt;-</span> as.integer(args[3])
+covBands <span class="org-constant">&lt;-</span> as.integer(args[4])
+readsName <span class="org-constant">&lt;-</span> args[5]
+genName <span class="org-constant">&lt;-</span> args[6]
+
+transpose <span class="org-constant">&lt;-</span> <span class="org-type">FALSE</span>
+isReads <span class="org-constant">&lt;-</span> <span class="org-type">TRUE</span>
+
+<span class="org-constant">library</span>(<span class="org-string">"reshape2"</span>)
+<span class="org-constant">library</span>(<span class="org-string">"ggplot2"</span>)
+<span class="org-constant">library</span>(<span class="org-string">"grid"</span>)
+
+<span class="org-comment-delimiter">## </span><span class="org-comment">returns list of n colours equally spaced in HSL, like ggplot default</span>
+<span class="org-function-name">gg_color_hue</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(n) {
+    hues = seq(15, 375, length=n+1)[1:n]
+    hcl(h=hues, l=60, c=120)
+}
+
+matrix <span class="org-constant">&lt;-</span> read.table(matrixFile)
+<span class="org-keyword">if</span> (transpose) {
+    matrix <span class="org-constant">&lt;-</span> t(matrix)
+}
+matrix <span class="org-constant">&lt;-</span> matrix[1:(maxMul+1),]
+lastcolumn <span class="org-constant">&lt;-</span> rowSums(matrix[,-seq_len(minCov+covBands-2)])
+matrix <span class="org-constant">&lt;-</span> matrix[,(minCov+1):(minCov+covBands-1)]
+matrix <span class="org-constant">&lt;-</span> cbind(matrix, lastcolumn)
+
+counts <span class="org-constant">&lt;-</span> data.frame(cbind(as.matrix(seq(0,maxMul)), matrix))
+names(counts) <span class="org-constant">&lt;-</span> c(<span class="org-string">"multiplicity"</span>,
+                   sapply(seq(minCov,minCov+covBands-1),
+                          <span class="org-keyword">function</span> (n) sprintf(<span class="org-string">"%dx"</span>, n)))
+names(counts)[length(names(counts))] <span class="org-constant">&lt;-</span>
+    sprintf(<span class="org-string">"%s+"</span>, names(counts)[length(names(counts))])
+counts <span class="org-constant">&lt;-</span> melt(counts, id.vars=c(<span class="org-string">"multiplicity"</span>),
+               variable.name=<span class="org-string">"coverage"</span>, value.name=<span class="org-string">"count"</span>)
+
+<span class="org-comment-delimiter">## </span><span class="org-comment">a big peak at 1 is often expected and not interesting, but any other peak is</span>
+totals <span class="org-constant">&lt;-</span> rowSums(matrix)
+peaksx <span class="org-constant">&lt;-</span> which(diff(sign(diff(totals))) == -2)
+peaksy <span class="org-constant">&lt;-</span> totals[peaksx]
+<span class="org-keyword">if</span> (!isReads) {
+    peaky <span class="org-constant">&lt;-</span> max(totals)
+} <span class="org-keyword">else</span> <span class="org-keyword">if</span> (peaksx[1] == 1) {
+    peaky <span class="org-constant">&lt;-</span> max(peaksy[-1])
+} <span class="org-keyword">else</span> {
+    peaky <span class="org-constant">&lt;-</span> max(peaksy)
+}
+
+p <span class="org-constant">&lt;-</span> ggplot(counts, aes(x=multiplicity, y=count, fill=coverage))
+p <span class="org-constant">&lt;-</span> p + geom_bar(stat=<span class="org-string">"identity"</span>)
+<span class="org-keyword">if</span> (minCov == 0) {
+    p <span class="org-constant">&lt;-</span> p + scale_fill_manual(values=c(<span class="org-string">"#444444"</span>, gg_color_hue(covBands-1)))
+} <span class="org-keyword">else</span> {
+    p <span class="org-constant">&lt;-</span> p + scale_fill_manual(values=c(gg_color_hue(covBands)))
+}
+p <span class="org-constant">&lt;-</span> p + coord_cartesian(xlim=c(0,maxMul))
+p <span class="org-constant">&lt;-</span> p + coord_cartesian(ylim=c(0,peaky*1.1))
+
+p <span class="org-constant">&lt;-</span> p + labs(title=sprintf(<span class="org-string">"%s"</span>, genName),
+              x=<span class="org-string">"k-mer multiplicity"</span>, y=<span class="org-string">"Number of distinct k-mers"</span>,
+              fill=<span class="org-string">"Coverage"</span>)
+p <span class="org-constant">&lt;-</span> p + theme(legend.justification=c(1,1),legend.position=c(1,1))
+</pre>
+</div>
+
+<p>
+Make PDF versions:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-function-name">commandArgs</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>() c(<span class="org-string">"data/kat-comp-discovar-contig-main.mx"</span>,
+                 <span class="org-string">"200"</span>, <span class="org-string">"0"</span>, <span class="org-string">"5"</span>, <span class="org-string">"PCR free"</span>, <span class="org-string">"Discovar"</span>)
+<span class="org-constant">source</span>(file=<span class="org-string">"plot-comp.R"</span>)
+
+pdf(file=<span class="org-string">"figures/kat-comp-discovar.pdf"</span>, width=5, height=4, onefile=<span class="org-type">TRUE</span>)
+print(p)
+dev.off()
+p1 <span class="org-constant">&lt;-</span> p
+
+<span class="org-function-name">commandArgs</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>() c(<span class="org-string">"data/kat-comp-falcon-pilon-main.mx"</span>,
+                 <span class="org-string">"200"</span>, <span class="org-string">"0"</span>, <span class="org-string">"5"</span>, <span class="org-string">"PCR free"</span>, <span class="org-string">"Falcon"</span>)
+<span class="org-constant">source</span>(file=<span class="org-string">"plot-comp.R"</span>)
+
+pdf(file=<span class="org-string">"figures/kat-comp-falcon.pdf"</span>, width=5, height=4, onefile=<span class="org-type">TRUE</span>)
+print(p)
+dev.off()
+p2 <span class="org-constant">&lt;-</span> p
+
+<span class="org-function-name">commandArgs</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>() c(<span class="org-string">"data/kat-comp-10x-main.mx"</span>,
+                 <span class="org-string">"200"</span>, <span class="org-string">"0"</span>, <span class="org-string">"5"</span>, <span class="org-string">"PCR free"</span>, <span class="org-string">"Supernova"</span>)
+<span class="org-constant">source</span>(file=<span class="org-string">"plot-comp.R"</span>)
+
+pdf(file=<span class="org-string">"figures/kat-comp-10x.pdf"</span>, width=5, height=4, onefile=<span class="org-type">TRUE</span>)
+print(p)
+dev.off()
+p3 <span class="org-constant">&lt;-</span> p
+
+p2 <span class="org-constant">&lt;-</span> p2 + scale_y_continuous(labels=<span class="org-type">NULL</span>) + ylab(<span class="org-type">NULL</span>)
+p3 <span class="org-constant">&lt;-</span> p3 + scale_y_continuous(labels=<span class="org-type">NULL</span>) + ylab(<span class="org-type">NULL</span>)
+
+pdf(file=<span class="org-string">"figures/kat-comp-all.pdf"</span>, width=15, height=5)
+grid.draw(cbind(ggplotGrob(p1),
+                ggplotGrob(p2),
+                ggplotGrob(p3),
+                size=<span class="org-string">"last"</span>))
+dev.off()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Figures</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The PNG output from R does not look very good for some reason.
+</p>
+
+
+<figure>
+<p><img src="figures/kat-comp-discovar.png" class="img-responsive" alt="kat-comp-discovar.png">
+</p>
+</figure>
+
+
+<figure>
+<p><img src="figures/kat-comp-falcon.png" class="img-responsive" alt="kat-comp-falcon.png">
+</p>
+</figure>
+
+
+<figure>
+<p><img src="figures/kat-comp-10x.png" class="img-responsive" alt="kat-comp-10x.png">
+</p>
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> BAC with difficult region</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+For the BAC plot we use a PacBio assembly of a BAC (labelled number 22). We
+have several tracks of data: three contig alignments, three read alignments,
+and a GC content and homopolymer track. The PacBio assembly of BAC 22 is
+contained in <code>bac22.fasta</code>.
+</p>
+</div>
+
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> Contig alignment</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+For the contig alignments we use bwa-mem.
+</p>
+
+<table id="bac-contig-files" class="table table-striped table-bordered table-hover table-condensed">
+
+
+<colgroup>
+<col  class="left">
+
+<col  class="left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="text-left">name</th>
+<th scope="col" class="text-left">filename</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-left">Supernova</td>
+<td class="text-left">10x</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar</td>
+<td class="text-left">discovar-contig</td>
+</tr>
+
+<tr>
+<td class="text-left">Falcon</td>
+<td class="text-left">falcon</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+bwa index data/bac22.fasta
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    bwa mem data/bac22.fasta data/${<span class="org-variable-name">filename</span>}.fasta <span class="org-sh-escaped-newline">\</span>
+        | samtools view -b - &gt; data/pb-${<span class="org-variable-name">filename</span>}.bam
+    sambamba sort data/pb-${<span class="org-variable-name">filename</span>}.bam
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+The <code>sam-to-R.py</code> script takes multiple SAM input files and outputs a table
+for plotting with ggplot. Optional parameters are <code>-m</code> for minimum length of
+the alignment and <code>-i</code> for minimum percent identity, both of which are
+calculated from the CIGAR string for each alignment in the SAM file. The first
+positional parameter provides a short name for each of the following
+alignments, which is embedded in the table, and then the alignment files
+follow. We use process substitution so we can use BAM files, ensuring that the
+SAM header is present by using the <code>-h</code> flag for samtools view.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python</span>
+
+<span class="org-keyword">import</span> sys
+<span class="org-keyword">import</span> argparse
+
+<span class="org-keyword">def</span> <span class="org-function-name">cigar_to_aln_len</span>(cigar):
+    <span class="org-variable-name">current_number</span> = <span class="org-string">""</span>
+    <span class="org-variable-name">total_length</span> = 0
+    <span class="org-keyword">for</span> c <span class="org-keyword">in</span> cigar:
+        <span class="org-keyword">if</span> c <span class="org-keyword">in</span> <span class="org-string">"0123456789"</span>:
+            <span class="org-variable-name">current_number</span> += c
+        <span class="org-keyword">elif</span> c <span class="org-keyword">in</span> <span class="org-string">"MD=X"</span>:
+            <span class="org-variable-name">total_length</span> += <span class="org-builtin">int</span>(current_number)
+            <span class="org-variable-name">current_number</span> = <span class="org-string">""</span>
+        <span class="org-keyword">else</span>:
+            <span class="org-variable-name">current_number</span> = <span class="org-string">""</span>
+    <span class="org-keyword">return</span> total_length
+
+
+<span class="org-keyword">def</span> <span class="org-function-name">parse_opts</span>(opt):
+    <span class="org-variable-name">opts</span> = {}
+    <span class="org-keyword">for</span> text_opt <span class="org-keyword">in</span> opt.split():
+        [name,typ,value] = text_opt.split(<span class="org-string">":"</span>)
+        <span class="org-keyword">if</span> typ == <span class="org-string">"A"</span>:
+            <span class="org-variable-name">opts</span>[name] = value
+        <span class="org-keyword">elif</span> typ == <span class="org-string">"i"</span>:
+            <span class="org-variable-name">opts</span>[name] = <span class="org-builtin">int</span>(value)
+        <span class="org-keyword">elif</span> typ == <span class="org-string">"f"</span>:
+            <span class="org-variable-name">opts</span>[name] = <span class="org-builtin">float</span>(value)
+        <span class="org-keyword">elif</span> typ == <span class="org-string">"Z"</span>:
+            <span class="org-variable-name">opts</span>[name] = value
+        <span class="org-keyword">elif</span> typ == <span class="org-string">"H"</span>:
+            <span class="org-variable-name">opts</span>[name] = <span class="org-builtin">bytearray</span>(value.decode(<span class="org-string">"hex"</span>))
+        <span class="org-keyword">elif</span> typ == <span class="org-string">"B"</span>:
+            <span class="org-variable-name">arr</span> = value.split(<span class="org-string">","</span>)
+            <span class="org-variable-name">arrtyp</span> = arr[0]
+            <span class="org-variable-name">arr</span> = arr[1:]
+            <span class="org-keyword">if</span> arrtyp == <span class="org-string">"f"</span>:
+                <span class="org-variable-name">arr</span> = [<span class="org-builtin">float</span>(f) <span class="org-keyword">for</span> f <span class="org-keyword">in</span> arr]
+            <span class="org-keyword">else</span>:
+                <span class="org-variable-name">arr</span> = [<span class="org-builtin">int</span>(f) <span class="org-keyword">for</span> f <span class="org-keyword">in</span> arr]
+            <span class="org-variable-name">opts</span>[name] = arr
+    <span class="org-keyword">return</span> opts
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">----- command line parsing -----</span>
+<span class="org-variable-name">parser</span> = argparse.ArgumentParser(
+    prog=<span class="org-string">"sam-to-svg"</span>,
+    description=<span class="org-string">"Turns SAM file into SVG showing alignments."</span>)
+parser.add_argument(<span class="org-string">"names"</span>, <span class="org-builtin">type</span>=<span class="org-builtin">str</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Name of alignments, comma separated."</span>)
+parser.add_argument(<span class="org-string">"sorted_sam_file"</span>, <span class="org-builtin">type</span>=<span class="org-builtin">str</span>, nargs=<span class="org-string">"+"</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Sorted SAM files."</span>)
+parser.add_argument(<span class="org-string">"-l"</span>, <span class="org-string">"--ref_length"</span>, <span class="org-builtin">type</span>=<span class="org-builtin">int</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Length of reference "</span>
+                    <span class="org-string">"(taken from SAM file if header is present."</span>)
+parser.add_argument(<span class="org-string">"-m"</span>, <span class="org-string">"--min_length"</span>, <span class="org-builtin">type</span>=<span class="org-builtin">int</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Minimum length of alignment to draw."</span>)
+parser.add_argument(<span class="org-string">"-i"</span>, <span class="org-string">"--min_identity"</span>, <span class="org-builtin">type</span>=<span class="org-builtin">float</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Minimum percent identity of match."</span>)
+
+<span class="org-variable-name">args</span> = parser.parse_args()
+<span class="org-comment-delimiter"># </span><span class="org-comment">----- end command line parsing -----</span>
+
+<span class="org-variable-name">names</span> = args.names.split(<span class="org-string">","</span>)
+<span class="org-variable-name">length</span> = args.ref_length
+<span class="org-variable-name">lanes</span> = []
+<span class="org-variable-name">lanesy</span> = []
+<span class="org-variable-name">lanelens</span> = []
+
+<span class="org-keyword">if</span> <span class="org-builtin">len</span>(names) &lt; <span class="org-builtin">len</span>(args.sorted_sam_file):
+    sys.<span class="org-constant">exit</span>(<span class="org-string">"Error: fewer names than SAM files given."</span>)
+
+<span class="org-variable-name">n</span> = 0
+<span class="org-variable-name">minlane</span> = 0
+<span class="org-variable-name">nexty</span> = 0
+<span class="org-keyword">for</span> sam_file <span class="org-keyword">in</span> args.sorted_sam_file:
+    <span class="org-variable-name">samf</span> = <span class="org-builtin">open</span>(sam_file)
+    <span class="org-variable-name">reflengths</span> = {}
+    <span class="org-variable-name">refname</span> = <span class="org-string">""</span>
+    <span class="org-keyword">for</span> line <span class="org-keyword">in</span> samf:
+        <span class="org-keyword">if</span> line[0] == <span class="org-string">"@"</span>:
+            <span class="org-keyword">if</span> line[1:3] == <span class="org-string">"SQ"</span>:
+                <span class="org-variable-name">split</span> = line[3:].split()
+                <span class="org-keyword">for</span> bit <span class="org-keyword">in</span> split:
+                    <span class="org-keyword">if</span> bit[0:2] == <span class="org-string">"SN"</span>:
+                        <span class="org-variable-name">refname</span> = bit[3:]
+                    <span class="org-keyword">if</span> bit[0:2] == <span class="org-string">"LN"</span>:
+                        <span class="org-variable-name">reflengths</span>[refname] = <span class="org-builtin">int</span>(bit[3:])
+            <span class="org-keyword">elif</span> line[1:3] == <span class="org-string">"PG"</span>:
+                <span class="org-variable-name">split</span> = line[3:].split()
+
+        <span class="org-keyword">else</span>:
+            [qname,flag,rname,pos,mapq,cigar,rnext,pnext,tlen,seq,qual,opt] \
+                = line.split(<span class="org-constant">None</span>,11)
+            <span class="org-variable-name">aln_len</span> = cigar_to_aln_len(cigar)
+            <span class="org-variable-name">opts</span> = parse_opts(opt)
+            <span class="org-keyword">if</span> rname == <span class="org-string">"*"</span>:
+                <span class="org-keyword">continue</span>
+            <span class="org-keyword">if</span> args.min_identity <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-constant">None</span> <span class="org-keyword">and</span> <span class="org-string">"NM"</span> <span class="org-keyword">not</span> <span class="org-keyword">in</span> opts:
+                sys.<span class="org-constant">exit</span>(<span class="org-string">"No NM value in SAM file, "</span>
+                         <span class="org-string">"can't calculate percent identity."</span>)
+            <span class="org-keyword">if</span> ((args.min_length <span class="org-keyword">is</span> <span class="org-constant">None</span> <span class="org-keyword">or</span> aln_len &gt;= args.min_length)
+                <span class="org-keyword">and</span> (args.min_identity <span class="org-keyword">is</span> <span class="org-constant">None</span>
+                     <span class="org-keyword">or</span> ((<span class="org-builtin">float</span>(aln_len - opts[<span class="org-string">"NM"</span>])/aln_len)*100
+                         &gt;= args.min_identity))):
+                <span class="org-variable-name">inserted</span> = <span class="org-constant">False</span>
+                <span class="org-keyword">for</span> lane <span class="org-keyword">in</span> lanes[minlane:]:
+                    <span class="org-keyword">if</span> <span class="org-builtin">len</span>(lane) == 0:
+                        lane.append((<span class="org-builtin">int</span>(pos),<span class="org-builtin">int</span>(pos)+aln_len,n))
+                        <span class="org-variable-name">inserted</span> = <span class="org-constant">True</span>
+                        <span class="org-keyword">break</span>
+                    <span class="org-keyword">elif</span> lane[-1][1] &lt; <span class="org-builtin">int</span>(pos):
+                        lane.append((<span class="org-builtin">int</span>(pos),<span class="org-builtin">int</span>(pos)+aln_len,n))
+                        <span class="org-variable-name">inserted</span> = <span class="org-constant">True</span>
+                        <span class="org-keyword">break</span>
+                <span class="org-keyword">if</span> <span class="org-keyword">not</span> inserted:
+                    lanes.append([(<span class="org-builtin">int</span>(pos),<span class="org-builtin">int</span>(pos)+aln_len,n)])
+                    lanelens.append(reflengths[rname])
+                    lanesy.append(nexty)
+                    <span class="org-variable-name">nexty</span> += 1
+    <span class="org-variable-name">minlane</span> = <span class="org-builtin">len</span>(lanes)
+    samf.close()
+    <span class="org-variable-name">n</span> += 1
+    <span class="org-variable-name">nexty</span> += 0.5
+
+sys.stdout.write(<span class="org-string">"{:s}\t{:s}\t{:s}\t{:s}\n"</span>
+                 .<span class="org-builtin">format</span>(<span class="org-string">"track"</span>,<span class="org-string">"file"</span>,<span class="org-string">"beg"</span>,<span class="org-string">"end"</span>))
+
+<span class="org-variable-name">n</span> = 0
+<span class="org-keyword">for</span> lane,lanelen <span class="org-keyword">in</span> <span class="org-builtin">zip</span>(lanes,lanelens):
+    sys.stdout.write(<span class="org-string">"{:.1f}\t{:s}\t{:d}\t{:d}\n"</span>
+                     .<span class="org-builtin">format</span>(lanesy[n], <span class="org-string">"space"</span>, 1, lanelen))
+    <span class="org-keyword">for</span> aln <span class="org-keyword">in</span> lane:
+        sys.stdout.write(<span class="org-string">"{:.1f}\t{:s}\t{:d}\t{:d}\n"</span>
+                         .<span class="org-builtin">format</span>(lanesy[n], names[aln[2]],
+                                 aln[0], aln[1]))
+    <span class="org-variable-name">n</span> += 1
+</pre>
+</div>
+
+<p>
+To generate the table for our three contig tracks we run:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+python sam-to-R.py <span class="org-sh-escaped-newline">\</span>
+       -m 1000 -i 99.9 dv,fal,10x <span class="org-sh-escaped-newline">\</span>
+       &lt;(samtools view -h data/pb-discovar-contig.sorted.bam) <span class="org-sh-escaped-newline">\</span>
+       &lt;(samtools view -h data/pb-falcon.sorted.bam) <span class="org-sh-escaped-newline">\</span>
+       &lt;(samtools view -h data/pb-10x.sorted.bam) <span class="org-sh-escaped-newline">\</span>
+       &gt; output/pb-r-table
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> Read alignment</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+For the read alignment we use bowtie2. The <code>ord</code> variable tells the aligner if
+the reads are in forward-reverse or reverse-forward order.
+</p>
+
+<table id="bac-read-files" class="table table-striped table-bordered table-hover table-condensed">
+
+
+<colgroup>
+<col  class="left">
+
+<col  class="left">
+
+<col  class="left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="text-left">name</th>
+<th scope="col" class="text-left">filename</th>
+<th scope="col" class="text-left">ord</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-left">Discovar</td>
+<td class="text-left">discovar</td>
+<td class="text-left">fr</td>
+</tr>
+
+<tr>
+<td class="text-left">Mate pair</td>
+<td class="text-left">mp</td>
+<td class="text-left">rf</td>
+</tr>
+
+<tr>
+<td class="text-left">Dovetail</td>
+<td class="text-left">dovetail</td>
+<td class="text-left">fr</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+We align each set of reads and suppress the unaligned reads to keep the file
+size smaller. Then they are filtered for reads with a high mapping quality and
+an edit distance with respect to the reference of no more than 1.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+bowtie2-build data/bac22.fasta data/bac22
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename ord; <span class="org-keyword">do</span>
+    bowtie2 -p 8 --no-unal --${<span class="org-variable-name">ord</span>} -x data/bac22 <span class="org-sh-escaped-newline">\</span>
+            -1 data/${<span class="org-variable-name">filename</span>}-R1.fastq -2 data/${<span class="org-variable-name">filename</span>}-R2.fastq <span class="org-sh-escaped-newline">\</span>
+        | samtools view -b - &gt; data/${<span class="org-variable-name">filename</span>}-aln.bam
+    sambamba view -f bam -F <span class="org-string">"mapping_quality &gt;= 30 and [NM] &lt;= 1"</span> <span class="org-sh-escaped-newline">\</span>
+             data/${<span class="org-variable-name">filename</span>}-aln.bam <span class="org-sh-escaped-newline">\</span>
+             &gt; data/${<span class="org-variable-name">filename</span>}-aln-acc.bam
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+For the paired-end (Discovar) we simply generate the depth at each reference
+position.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+
+sambamba sort data/discovar-aln-acc.bam
+samtools depth -a data/discovar-aln-acc.sorted.bam <span class="org-sh-escaped-newline">\</span>
+         &gt; output/discovar-aln-acc.cov
+</pre>
+</div>
+
+<p>
+For the mate pair and Dovetail we calculate the coverage the aligned
+fragments. First we need to sort the alignments by name to bring the pairs
+together:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-keyword">for</span> filename<span class="org-keyword"> in</span> mp dovetail; <span class="org-keyword">do</span>
+    samtools sort -n -O bam -T data/${<span class="org-variable-name">filename</span>}-aln-acc.sorted.name.bam <span class="org-sh-escaped-newline">\</span>
+             &lt;(samtools view -bh -F 1804 -q 1 data/${<span class="org-variable-name">filename</span>}-aln-acc.bam) <span class="org-sh-escaped-newline">\</span>
+             &gt; data/${<span class="org-variable-name">filename</span>}-aln.sorted.name.bam
+<span class="org-keyword">done</span>
+</pre>
+</div>
+
+<p>
+Now we use bedtools to make a <code>bed</code> file with the physical fragments:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-keyword">for</span> filename<span class="org-keyword"> in</span> mp dovetail; <span class="org-keyword">do</span>
+    bamToBed -i data/${<span class="org-variable-name">filename</span>}-aln.sorted.name.bam -bedpe <span class="org-sh-escaped-newline">\</span>
+        | cut -f 1,2,6 | sort -k1,1 &gt; output/${<span class="org-variable-name">filename</span>}.phys.bed
+<span class="org-keyword">done</span>
+</pre>
+</div>
+
+<p>
+And finally calculate the coverage at each reference position:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-keyword">for</span> filename<span class="org-keyword"> in</span> mp dovetail; <span class="org-keyword">do</span>
+    bedtools genomecov -d -i output/${<span class="org-variable-name">filename</span>}.phys.bed <span class="org-sh-escaped-newline">\</span>
+             -g data/bac22.fasta.fai &gt; output/${<span class="org-variable-name">filename</span>}.phys.cov
+<span class="org-keyword">done</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><span class="section-number-3">4.3</span> GC content and homopolymers</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+For the GC content we use bedtools. We make 100bp windows and calculate the GC
+content in the windows.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+
+bedtools makewindows -g data/bac22.fasta.fai -w 100 <span class="org-sh-escaped-newline">\</span>
+         &gt; output/bac22.100bps.bed
+bedtools nuc -fi data/bac22.fasta -bed output/bac22.100bps.bed <span class="org-sh-escaped-newline">\</span>
+         &gt; output/bac22.gc.txt
+awk -v <span class="org-variable-name">w</span>=100 -vOFS=<span class="org-string">'\t'</span> -vFS=<span class="org-string">'\t'</span> <span class="org-string">'NR &gt; 1 {print $1,($2+$3)/2,$5}'</span> <span class="org-sh-escaped-newline">\</span>
+    output/bac22.gc.txt <span class="org-sh-escaped-newline">\</span>
+    &gt; output/bac22.gc.100bps
+</pre>
+</div>
+
+<p>
+The homopolymers are calculated using the following python script:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">returns positions of homopolymers for each contig</span>
+
+<span class="org-keyword">import</span> sys
+<span class="org-keyword">import</span> os
+<span class="org-keyword">import</span> argparse
+<span class="org-keyword">import</span> threading
+<span class="org-keyword">import</span> time
+<span class="org-keyword">from</span> collections <span class="org-keyword">import</span> namedtuple
+
+<span class="org-keyword">def</span> <span class="org-function-name">progress</span>(fp, fs, fin):
+    <span class="org-variable-name">progress</span> = [<span class="org-string">"-"</span>, <span class="org-string">"\\"</span>, <span class="org-string">"|"</span>, <span class="org-string">"/"</span>]
+    <span class="org-variable-name">prog</span> = 0
+    <span class="org-keyword">while</span> <span class="org-keyword">not</span> fin.isSet():
+        <span class="org-keyword">if</span> sys.stderr.isatty():
+            sys.stderr.write(<span class="org-string">"\r{:3.0f}% {:s}\b"</span>
+                             .<span class="org-builtin">format</span>(fp.tell()/<span class="org-builtin">float</span>(fs)*100,
+                                     progress[prog]))
+            sys.stderr.flush()
+            <span class="org-variable-name">prog</span> = (prog + 1)%4
+            time.sleep(0.1)
+        <span class="org-keyword">else</span>:
+            sys.stderr.write(<span class="org-string">"{:3.0f}% "</span>
+                             .<span class="org-builtin">format</span>(fp.tell()/<span class="org-builtin">float</span>(fs)*100))
+            time.sleep(5)
+    <span class="org-keyword">else</span>:
+        <span class="org-keyword">if</span> sys.stderr.isatty():
+            sys.stderr.write(<span class="org-string">"\r100% *"</span>)
+        sys.stderr.write(<span class="org-string">"\n"</span>)
+    <span class="org-keyword">return</span>
+
+
+<span class="org-variable-name">Homopolymer</span> = namedtuple(<span class="org-string">"Homopolymer"</span>, <span class="org-string">"seqname base length beg end"</span>)
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">----- command line parsing -----</span>
+<span class="org-variable-name">parser</span> = argparse.ArgumentParser(
+    description=<span class="org-string">"Finds positions of homopolyomers."</span>)
+parser.add_argument(<span class="org-string">"file"</span>, <span class="org-builtin">type</span>=<span class="org-builtin">str</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Fasta file."</span>)
+parser.add_argument(<span class="org-string">"min_length"</span>, <span class="org-builtin">type</span>=<span class="org-builtin">int</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Minimum length of homopolymer."</span>)
+parser.add_argument(<span class="org-string">"-s"</span>, <span class="org-string">"--case_sensitive"</span>,
+                    dest=<span class="org-string">"case"</span>, action=<span class="org-string">"store_true"</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Case sensitive bases."</span>)
+parser.add_argument(<span class="org-string">"-b"</span>, <span class="org-string">"--bases"</span>, <span class="org-builtin">type</span>=<span class="org-builtin">str</span>,
+                    <span class="org-builtin">help</span>=<span class="org-string">"Comma separated list of bases to consider."</span>)
+parser.set_defaults(case=<span class="org-constant">False</span>)
+
+<span class="org-variable-name">args</span> = parser.parse_args()
+<span class="org-comment-delimiter"># </span><span class="org-comment">----- end command line parsing -----</span>
+
+<span class="org-variable-name">fasta_size</span> = os.path.getsize(args.<span class="org-builtin">file</span>)
+<span class="org-variable-name">fasta</span> = <span class="org-builtin">open</span>(args.<span class="org-builtin">file</span>)
+
+sys.stderr.write(<span class="org-string">"Reading {:s}...\n"</span>.<span class="org-builtin">format</span>(args.<span class="org-builtin">file</span>))
+<span class="org-variable-name">fin</span> = threading.Event()
+<span class="org-variable-name">pthread</span> = threading.Thread(name = <span class="org-string">"progress"</span>,
+                           target = progress,
+                           args = (fasta, fasta_size, fin))
+
+<span class="org-variable-name">homopolymers</span> = []
+<span class="org-variable-name">name</span> = <span class="org-string">""</span>
+<span class="org-variable-name">pos</span> = 0
+<span class="org-variable-name">run</span> = 0
+<span class="org-variable-name">last_base</span> = <span class="org-string">""</span>
+<span class="org-keyword">try</span>:
+    pthread.start()
+    <span class="org-keyword">for</span> line <span class="org-keyword">in</span> fasta:
+        <span class="org-keyword">if</span> line[0] == <span class="org-string">'&gt;'</span>:
+            <span class="org-keyword">if</span> run &gt;= args.min_length:
+                    homopolymers.append(
+                        Homopolymer(name, last_base,
+                                    run, pos-run+1, pos))
+            <span class="org-variable-name">name</span> = line[1:-1]
+            <span class="org-variable-name">pos</span> = 0
+            <span class="org-variable-name">run</span> = 0
+            <span class="org-variable-name">last_base</span> = <span class="org-string">""</span>
+            <span class="org-keyword">continue</span>
+        <span class="org-keyword">for</span> base <span class="org-keyword">in</span> line[:-1]:
+            <span class="org-variable-name">pos</span> += 1
+            <span class="org-keyword">if</span> <span class="org-keyword">not</span> args.case: <span class="org-variable-name">base</span> = base.upper()
+            <span class="org-keyword">if</span> last_base == <span class="org-string">""</span>:
+                <span class="org-variable-name">last_base</span> = base
+                <span class="org-variable-name">run</span> = 1
+            <span class="org-keyword">elif</span> base == last_base:
+                <span class="org-variable-name">run</span> += 1
+            <span class="org-keyword">else</span>:
+                <span class="org-keyword">if</span> run &gt;= args.min_length:
+                    homopolymers.append(
+                        Homopolymer(name, last_base,
+                                    run, pos-run, pos-1))
+                <span class="org-variable-name">run</span> = 1
+                <span class="org-variable-name">last_base</span> = base
+    <span class="org-keyword">if</span> run &gt;= args.min_length:
+        homopolymers.append(
+            Homopolymer(name, last_base,
+                        run, pos-run+1, pos))
+    fin.<span class="org-builtin">set</span>()
+    pthread.join()
+<span class="org-keyword">except</span> <span class="org-type">KeyboardInterrupt</span>:
+    fin.<span class="org-builtin">set</span>()
+    pthread.join()
+    isolate_file.close()
+    sys.stderr.write(<span class="org-string">"\n"</span>)
+    sys.<span class="org-constant">exit</span>(1)
+fasta.close()
+
+<span class="org-keyword">if</span> args.bases <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-constant">None</span>:
+    <span class="org-keyword">if</span> args.case:
+        <span class="org-variable-name">bases</span> = <span class="org-builtin">set</span>(args.bases.split(<span class="org-string">","</span>))
+    <span class="org-keyword">else</span>:
+        <span class="org-variable-name">bases</span> = <span class="org-builtin">set</span>(args.bases.upper().split(<span class="org-string">","</span>))
+<span class="org-keyword">else</span>:
+    <span class="org-variable-name">bases</span> = <span class="org-constant">None</span>
+
+<span class="org-keyword">for</span> homo <span class="org-keyword">in</span> homopolymers:
+    <span class="org-keyword">if</span> bases <span class="org-keyword">is</span> <span class="org-constant">None</span> <span class="org-keyword">or</span> homo.base <span class="org-keyword">in</span> bases:
+        sys.stdout.write(<span class="org-string">"{:s}\t{:s}\t{:d}\t{:d}\t{:d}\n"</span>
+                         .<span class="org-builtin">format</span>(*homo))
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+python ~/code/tools/homopolymers.py data/bac22.fasta 4 <span class="org-sh-escaped-newline">\</span>
+       &gt; output/bac22.homopolymers.4
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4"><span class="section-number-3">4.4</span> Figure</h3>
+<div class="outline-text-3" id="text-4-4">
+<p>
+Finally, after generating the data we can plot it all using ggplot.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env Rscript</span>
+
+<span class="org-function-name">gg_colour_hue</span> <span class="org-constant">&lt;-</span> <span class="org-keyword">function</span>(n) {
+    hues = seq(15, 375, length=n+1)[1:n]
+    c(hcl(h=hues, l=65, c=100))
+}
+
+
+<span class="org-constant">library</span>(<span class="org-string">"ggplot2"</span>)
+<span class="org-constant">library</span>(<span class="org-string">"grid"</span>)
+<span class="org-constant">library</span>(<span class="org-string">"Cairo"</span>)
+
+args <span class="org-constant">&lt;-</span> commandArgs(<span class="org-type">TRUE</span>)
+
+<span class="org-keyword">if</span> (length(args) &lt; 9) {
+    print(<span class="org-string">"usage: prog title output dvc mpc dtc gc hom con conorder"</span>)
+    quit()
+}
+
+title <span class="org-constant">&lt;-</span> args[1]
+output <span class="org-constant">&lt;-</span> args[2]
+dvcf <span class="org-constant">&lt;-</span> args[3]
+mpcf <span class="org-constant">&lt;-</span> args[4]
+dtcf <span class="org-constant">&lt;-</span> args[5]
+gcf  <span class="org-constant">&lt;-</span> args[6]
+homf <span class="org-constant">&lt;-</span> args[7]
+conf <span class="org-constant">&lt;-</span> args[8]
+conorder <span class="org-constant">&lt;-</span> args[9]
+
+dvc <span class="org-constant">&lt;-</span> read.table(dvcf, col.names=c(<span class="org-string">"chr"</span>, <span class="org-string">"pos"</span>, <span class="org-string">"cov"</span>))
+mpc <span class="org-constant">&lt;-</span> read.table(mpcf, col.names=c(<span class="org-string">"chr"</span>, <span class="org-string">"pos"</span>, <span class="org-string">"cov"</span>))
+dtc <span class="org-constant">&lt;-</span> read.table(dtcf, col.names=c(<span class="org-string">"chr"</span>, <span class="org-string">"pos"</span>, <span class="org-string">"cov"</span>))
+gc  <span class="org-constant">&lt;-</span> read.table(gcf,  col.names=c(<span class="org-string">"chr"</span>, <span class="org-string">"pos"</span>, <span class="org-string">"gc"</span>))
+hom <span class="org-constant">&lt;-</span> read.table(homf, col.names=c(<span class="org-string">"chr"</span>, <span class="org-string">"base"</span>, <span class="org-string">"length"</span>,
+                            <span class="org-string">"beg"</span>, <span class="org-string">"end"</span>))
+con <span class="org-constant">&lt;-</span> read.table(conf, header=<span class="org-type">TRUE</span>)
+conorder <span class="org-constant">&lt;-</span> unlist(strsplit(conorder, split=<span class="org-string">","</span>))
+con$file <span class="org-constant">&lt;-</span> factor(con$file, levels=c(conorder, <span class="org-string">"space"</span>))
+
+plotmargin <span class="org-constant">&lt;-</span> unit(c(0,0,0,4), <span class="org-string">"mm"</span>)
+
+conp <span class="org-constant">&lt;-</span> ggplot(con, aes(ymin=track+0.1, ymax=track+0.9,
+                        xmin=beg, xmax=end, fill=file)) +
+    guides(fill=<span class="org-type">FALSE</span>) +
+    xlab(<span class="org-type">NULL</span>) +
+    ylab(<span class="org-type">NULL</span>) +
+    scale_x_continuous(labels=<span class="org-type">NULL</span>) +
+    scale_y_continuous(breaks=c(0.5,2.0,4.5),
+                       labels=c(<span class="org-string">"Discovar"</span>, <span class="org-string">"Falcon"</span>, <span class="org-string">"Supernova"</span>)) +
+    scale_fill_manual(values=c(gg_colour_hue(3),<span class="org-string">"light grey"</span>)) +
+    theme(axis.ticks.x = element_blank(),
+          axis.ticks.y = element_blank(),
+          axis.text.y = element_text(size=8),
+          plot.margin=plotmargin) +
+    geom_rect() +
+    ggtitle(expression(paste(italic(<span class="org-string">"S. verrucosum"</span>), <span class="org-string">" BAC 22"</span>)))
+
+dvcmax <span class="org-constant">&lt;-</span> 1000
+dvcp <span class="org-constant">&lt;-</span> ggplot(dvc, aes(x=pos, ymin=0, ymax=cov)) +
+    xlab(<span class="org-type">NULL</span>) +
+    ylab(<span class="org-string">"Paired end"</span>) +
+    scale_x_continuous(labels=<span class="org-type">NULL</span>) +
+    scale_y_log10(breaks=c(1,10,100,1000)) +
+    theme(axis.ticks.x = element_blank(),
+          axis.text.y = element_text(size=8),
+          axis.title.y = element_text(size=9,vjust=0.1),
+          plot.margin=plotmargin) +
+    geom_ribbon()
+
+mpcp <span class="org-constant">&lt;-</span> ggplot(mpc, aes(x=pos, ymin=0, ymax=cov)) +
+    xlab(<span class="org-type">NULL</span>) +
+    ylab(<span class="org-string">"Mate pair"</span>) +
+    scale_x_continuous(labels=<span class="org-type">NULL</span>) +
+    theme(axis.ticks.x = element_blank(),
+          axis.text.y = element_text(size=8),
+          axis.title.y = element_text(size=9,vjust=0.1),
+          plot.margin=plotmargin) +
+    geom_ribbon()
+
+dtcp <span class="org-constant">&lt;-</span> ggplot(dtc, aes(x=pos, ymin=0, ymax=cov)) +
+    xlab(<span class="org-type">NULL</span>) +
+    ylab(<span class="org-string">"Dovetail"</span>) +
+    scale_x_continuous(labels=<span class="org-type">NULL</span>) +
+    theme(axis.ticks.x = element_blank(),
+          axis.text.y = element_text(size=8),
+          axis.title.y = element_text(size=9,vjust=0.1),
+          plot.margin=plotmargin) +
+    geom_ribbon()
+
+pad <span class="org-constant">&lt;-</span> 50
+gcp <span class="org-constant">&lt;-</span> ggplot(gc) +
+    geom_rect(data=subset(hom,length &gt; 4 &amp; base != <span class="org-string">"N"</span>),
+              aes(ymin=0,ymax=100, xmin=beg-pad, xmax=end+pad,
+                  fill=base, alpha=length)) +
+    geom_line(aes(x=pos, y=gc*100)) +
+    guides(alpha=<span class="org-type">FALSE</span>, fill=<span class="org-type">FALSE</span>) +
+    scale_fill_manual(name=<span class="org-string">"Base"</span>,
+                      values=c(
+                          <span class="org-string">"A"</span> = <span class="org-string">"red"</span>,
+                          <span class="org-string">"C"</span> = <span class="org-string">"blue"</span>,
+                          <span class="org-string">"G"</span> = <span class="org-string">"yellow"</span>,
+                          <span class="org-string">"T"</span> = <span class="org-string">"green"</span>,
+                          <span class="org-string">"N"</span> = <span class="org-string">"black"</span>)) +
+    xlab(<span class="org-string">"Position"</span>) +
+    ylab(<span class="org-string">"GC Cont"</span>) +
+    theme(plot.margin=plotmargin,
+          axis.text.y = element_text(size=8),
+          axis.title.y = element_text(size=9,vjust=0.1))
+
+dvcg <span class="org-constant">&lt;-</span> ggplotGrob(dvcp)
+mpcg <span class="org-constant">&lt;-</span> ggplotGrob(mpcp)
+dtcg <span class="org-constant">&lt;-</span> ggplotGrob(dtcp)
+gcg <span class="org-constant">&lt;-</span> ggplotGrob(gcp)
+cong <span class="org-constant">&lt;-</span> ggplotGrob(conp)
+
+pdf(file=sprintf(<span class="org-string">"%s.pdf"</span>,output), height=4.5, width=12)
+grid.draw(rbind(cong, dvcg, mpcg, dtcg, gcg, size=<span class="org-string">"last"</span>))
+dev.off()
+
+CairoPNG(file=sprintf(<span class="org-string">"%s.png"</span>,output), height=4.5, width=12,
+    units=<span class="org-string">"in"</span>, dpi=80)
+grid.draw(rbind(cong, dvcg, mpcg, dtcg, gcg, size=<span class="org-string">"last"</span>))
+dev.off()
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+./bac-graphs2.R <span class="org-sh-escaped-newline">\</span>
+    bac22 <span class="org-sh-escaped-newline">\</span>
+    figures/bac22-pacbio <span class="org-sh-escaped-newline">\</span>
+    output/discovar-aln-acc.cov <span class="org-sh-escaped-newline">\</span>
+    output/mp.phys.cov <span class="org-sh-escaped-newline">\</span>
+    output/dovetail.phys.cov <span class="org-sh-escaped-newline">\</span>
+    output/bac22.gc.100bps <span class="org-sh-escaped-newline">\</span>
+    output/bac22.homopolymers.4 <span class="org-sh-escaped-newline">\</span>
+    output/pb-r-table <span class="org-sh-escaped-newline">\</span>
+    10x,fal,dv
+</pre>
+</div>
+
+
+<figure>
+<p><img src="figures/bac22-pacbio.png" class="img-responsive" alt="bac22-pacbio.png">
+</p>
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Gene content</h2>
+<div class="outline-text-2" id="text-5">
+<table id="gene-content-names" class="table table-striped table-bordered table-hover table-condensed">
+
+
+<colgroup>
+<col  class="left">
+
+<col  class="left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="text-left">name</th>
+<th scope="col" class="text-left">filename</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-left">Supernova + BioNano</td>
+<td class="text-left">10x-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar + MP + DT + BioNano</td>
+<td class="text-left">discovar-mp-dt-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Falcon + DT + BioNano</td>
+<td class="text-left">falcon-dt-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Tuberosum reference</td>
+<td class="text-left">tuberosum</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+We align the transcripts of the <i>S. tuberosum</i> genome to our assemblies using
+BLAST version 2.2.31. The transcripts were retrieved from here:
+<a href="http://solanaceae.plantbiology.msu.edu/data/PGSC_DM_v3.4_transcript-update.fasta.zip">http://solanaceae.plantbiology.msu.edu/data/PGSC_DM_v3.4_transcript-update.fasta.zip</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash"><span class="org-keyword">for</span> asm<span class="org-keyword"> in</span> 10x-bn discovar-mp-dt-bn falcon-dt-bn; <span class="org-keyword">do</span>
+    blastn -outfmt <span class="org-string">'6 qseqid qstart qend qlen sseqid sstart send slen pident length evalue'</span> <span class="org-sh-escaped-newline">\</span>
+           -evalue 1e-3 <span class="org-sh-escaped-newline">\</span>
+           -subject ${<span class="org-variable-name">asm</span>}.fasta <span class="org-sh-escaped-newline">\</span>
+           -query PGSC_DM_v3.4_transcript-update.fasta <span class="org-sh-escaped-newline">\</span>
+           &gt; ${<span class="org-variable-name">asm</span>}-transcripts.blastn
+<span class="org-keyword">done</span>
+</pre>
+</div>
+
+<p>
+We can adjust the minimum percentage identity of BLAST alignments that we
+consider and calculate the percent coverage of each transcript in the
+alignment. We use the <code>transcript-coverage.py</code> script to calculate the percent
+coverage for a transcript:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env python</span>
+
+<span class="org-keyword">import</span> sys
+
+<span class="org-variable-name">current_tid</span> = <span class="org-constant">None</span>
+<span class="org-variable-name">current_tlen</span> = 0
+<span class="org-variable-name">last_start</span> = 0
+<span class="org-variable-name">last_end</span> = 0
+<span class="org-variable-name">seg_lengths</span> = []
+
+<span class="org-keyword">for</span> line <span class="org-keyword">in</span> sys.stdin:
+    (tid,tstart,tend,tlen,
+     seqid,seqstart,seqend,seqlen,
+     pident,length,evalue) = line.split()
+    <span class="org-variable-name">tstart</span> = <span class="org-builtin">int</span>(tstart)
+    <span class="org-variable-name">tend</span> = <span class="org-builtin">int</span>(tend)
+    <span class="org-variable-name">tlen</span> = <span class="org-builtin">int</span>(tlen)
+    <span class="org-variable-name">seqstart</span> = <span class="org-builtin">int</span>(seqstart)
+    <span class="org-variable-name">seqend</span> = <span class="org-builtin">int</span>(seqend)
+    <span class="org-variable-name">seqlen</span> = <span class="org-builtin">int</span>(seqlen)
+    <span class="org-keyword">if</span> tid != current_tid:
+        <span class="org-keyword">if</span> current_tid <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-constant">None</span>:
+            sys.stdout.write(<span class="org-string">"{:s}\t{:d}\t{:d}\t{:f}\n"</span>
+                             .<span class="org-builtin">format</span>(current_tid,current_tlen,
+                                     <span class="org-builtin">sum</span>(seg_lengths),
+                                     <span class="org-builtin">float</span>(<span class="org-builtin">sum</span>(seg_lengths))/
+                                     current_tlen))
+        <span class="org-variable-name">current_tid</span> = tid
+        <span class="org-variable-name">current_tlen</span> = tlen
+        <span class="org-variable-name">last_start</span> = tstart
+        <span class="org-variable-name">last_end</span> = tend
+        <span class="org-variable-name">seg_lengths</span> = [last_end - last_start + 1]
+    <span class="org-keyword">else</span>:
+        <span class="org-keyword">if</span> tstart &lt; last_start:
+            sys.<span class="org-constant">exit</span>(<span class="org-string">"Input file not sorted by transcript start!"</span>)
+        <span class="org-keyword">if</span> tstart &lt;= last_end:
+            <span class="org-comment-delimiter"># </span><span class="org-comment">extend segment</span>
+            <span class="org-variable-name">last_start</span> = <span class="org-builtin">min</span>(last_start, tstart)
+            <span class="org-variable-name">last_end</span> = <span class="org-builtin">max</span>(last_end, tend)
+            <span class="org-variable-name">seg_lengths</span>[-1] = last_end - last_start + 1
+        <span class="org-keyword">else</span>:
+            <span class="org-comment-delimiter"># </span><span class="org-comment">new segment</span>
+            <span class="org-variable-name">last_start</span> = tstart
+            <span class="org-variable-name">last_end</span> = tlen
+            seg_lengths.append(last_end - last_start + 1)
+
+<span class="org-keyword">if</span> current_tid <span class="org-keyword">is</span> <span class="org-keyword">not</span> <span class="org-constant">None</span>:
+    sys.stdout.write(<span class="org-string">"{:s}\t{:d}\t{:d}\t{:f}\n"</span>
+                     .<span class="org-builtin">format</span>(current_tid,current_tlen,
+                             <span class="org-builtin">sum</span>(seg_lengths),
+                             <span class="org-builtin">float</span>(<span class="org-builtin">sum</span>(seg_lengths))/
+                             current_tlen))
+</pre>
+</div>
+
+<p>
+This is run after filtering the alignments with awk and sorting by alignment
+start position:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash"><span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    <span class="org-keyword">for</span> i<span class="org-keyword"> in</span> {85..100}; <span class="org-keyword">do</span>
+        ./make-coverages data/${<span class="org-variable-name">filename</span>}-transcripts.blastn ${<span class="org-variable-name">i</span>} output/
+    <span class="org-keyword">done</span>
+<span class="org-keyword">done</span> &lt;&lt;EOF
+<span class="org-sh-heredoc">${table}</span>
+<span class="org-sh-heredoc">EOF</span>
+</pre>
+</div>
+
+<p>
+Now we can count the number of transcripts which appear with various
+thresholds:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash"><span class="org-keyword">for</span> filename<span class="org-keyword"> in</span> 10x-bn discovar-mp-dt-bn falcon-dt-bn; <span class="org-keyword">do</span>
+    <span class="org-keyword">for</span> cov<span class="org-keyword"> in</span> $(<span class="org-sh-quoted-exec">seq</span> 0.85 0.01 1.0); <span class="org-keyword">do</span>
+        <span class="org-keyword">for</span> i<span class="org-keyword"> in</span> {85..100}; <span class="org-keyword">do</span>
+            <span class="org-variable-name">num</span>=$(<span class="org-sh-quoted-exec">awk</span> -v <span class="org-variable-name">c</span>=${<span class="org-variable-name">cov</span>} <span class="org-string">'$4 &gt;= c'</span> output/${<span class="org-variable-name">filename</span>}-transcripts-i${<span class="org-variable-name">i</span>}.coverage | wc -l)
+            <span class="org-builtin">echo</span> -ne <span class="org-string">"${filename}\t${cov}\t${i}\t${num}\n"</span>
+        <span class="org-keyword">done</span>
+    <span class="org-keyword">done</span>
+<span class="org-keyword">done</span> &gt; output/transcript-asm-cov-id-count
+</pre>
+</div>
+
+
+
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env Rscript</span>
+
+<span class="org-constant">library</span>(<span class="org-string">"ggplot2"</span>)
+<span class="org-constant">library</span>(<span class="org-string">"reshape2"</span>)
+<span class="org-constant">library</span>(<span class="org-string">"grid"</span>)
+
+t <span class="org-constant">&lt;-</span> read.table(<span class="org-string">"../genes-table"</span>, header=<span class="org-type">TRUE</span>)
+tm <span class="org-constant">&lt;-</span> melt(t, id.vars=<span class="org-string">"asm"</span>, variable.name=<span class="org-string">"type"</span>, value.name=<span class="org-string">"genes"</span>)
+
+p <span class="org-constant">&lt;-</span> ggplot(tm, aes(x=asm, y=genes, fill=type)) +
+    scale_fill_discrete(name=<span class="org-string">"Type"</span>,
+                      labels=c(<span class="org-string">"cegcom"</span>=<span class="org-string">"Cegma complete"</span>,
+                          <span class="org-string">"cegpar"</span>=<span class="org-string">"Cegma partial"</span>,
+                          <span class="org-string">"buscom"</span>=<span class="org-string">"Busco complete"</span>,
+                          <span class="org-string">"buspar"</span>=<span class="org-string">"Busco partial"</span>,
+                          <span class="org-string">"busmis"</span>=<span class="org-string">"Busco missing"</span>)) +
+    scale_x_discrete(name=<span class="org-string">"Assembly"</span>) +
+    scale_y_continuous(name=<span class="org-string">"Number of genes"</span>) +
+    geom_bar(stat=<span class="org-string">"identity"</span>, position=<span class="org-string">"dodge"</span>) +
+    geom_bar(stat=<span class="org-string">"identity"</span>, position=<span class="org-string">"dodge"</span>, colour=<span class="org-string">"black"</span>, show_guide=<span class="org-type">FALSE</span>) +
+    theme(legend.position=<span class="org-string">"bottom"</span>, legend.key.size=unit(3, <span class="org-string">"mm"</span>),
+          legend.text=element_text(size=8),legend.title=element_text(size=8),
+          plot.margin=unit(c(2,2,0,0), <span class="org-string">"mm"</span>)) +
+    guides(fill=guide_legend(nrow=2,byrow=<span class="org-type">TRUE</span>))
+
+pdf(file=<span class="org-string">"genes-bar.pdf"</span>, width=4, height=4)
+print(p)
+dev.off()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Synteny to <i>S. tuberosum</i></h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><span class="section-number-3">6.1</span> Code</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+We generate alignments between the <i>S. tuberosum</i> reference and our assemblies
+using <code>nucmer</code>. We are interesting in our three "large" hybrid assemblies.
+</p>
+
+<table id="synteny-names" class="table table-striped table-bordered table-hover table-condensed">
+
+
+<colgroup>
+<col  class="left">
+
+<col  class="left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="text-left">name</th>
+<th scope="col" class="text-left">filename</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="text-left">Supernova + BioNano</td>
+<td class="text-left">10x-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Discovar + MP + DT + BioNano</td>
+<td class="text-left">discovar-mp-dt-bn</td>
+</tr>
+
+<tr>
+<td class="text-left">Falcon + DT + BioNano</td>
+<td class="text-left">falcon-dt-bn-2</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The file <code>falcon-dt-bn-2</code> is generated by replacing the pipe symbols in the
+fasta file with underscores because some or all of mummer's scripts do not
+support the pipe symbol.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+
+gzip -cd data/falcon-dt-bn.fasta.gz <span class="org-sh-escaped-newline">\</span>
+    | sed <span class="org-string">'s/|/_/g'</span> &gt; data/falcon-dt-bn-2.fasta
+</pre>
+</div>
+
+<p>
+The following code requires mummer and the <i>S. tuberosum</i> pseudomolecule
+assembly version 4.03 in the <code>data</code> directory. It is available here:
+<a href="http://solanaceae.plantbiology.msu.edu/pgsc_download.shtml">http://solanaceae.plantbiology.msu.edu/pgsc_download.shtml</a>
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    nucmer -c 65 -l 65 <span class="org-sh-escaped-newline">\</span>
+           -p output/${<span class="org-variable-name">filename</span>} <span class="org-sh-escaped-newline">\</span>
+           data/PGSC_DM_v4.03_pseudomolecules.fasta <span class="org-sh-escaped-newline">\</span>
+           data/${<span class="org-variable-name">filename</span>}.fasta
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+First we filter the delta to only include alignments of at least 90% identity
+and 10kb in length.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    <span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -s output/${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.delta ]]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Filtering delta..."</span>
+        delta-filter -q -r -i ${<span class="org-variable-name">i</span>} -l ${<span class="org-variable-name">l</span>} output/${<span class="org-variable-name">filename</span>}.delta <span class="org-sh-escaped-newline">\</span>
+                     &gt; output/${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.delta
+    <span class="org-keyword">fi</span>
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+Now we generate the coords files which we'll need later to sort and orientate
+the scaffolds for each chromosome. By default mummer will plot every scaffold
+in the assembly even if we select only one chromosome of the reference,
+therefore we need to find which scaffolds actually have alignments with each
+reference sequence.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    <span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -s output/${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.coords ]]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Making coords..."</span>
+        show-coords -THrcl output/${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.delta <span class="org-sh-escaped-newline">\</span>
+                    &gt; output/${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.coords
+    <span class="org-keyword">fi</span>
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+Mummer will also require the length of each assembly scaffold that we wish to
+plot.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    <span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -s output/${<span class="org-variable-name">filename</span>}.length ]]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Calculating lengths of ${filename}..."</span>
+        cat data/${<span class="org-variable-name">filename</span>}.fasta <span class="org-sh-escaped-newline">\</span>
+            | awk <span class="org-string">'</span>
+<span class="org-string">                  /^&gt;/ {</span>
+<span class="org-string">                    if (len) {</span>
+<span class="org-string">                      print len, name</span>
+<span class="org-string">                    }</span>
+<span class="org-string">                    split($0,s," ")</span>
+<span class="org-string">                    name=substr(s[1],2)</span>
+<span class="org-string">                    len=0</span>
+<span class="org-string">                    next</span>
+<span class="org-string">                  }</span>
+<span class="org-string">                  {</span>
+<span class="org-string">                    len += length($0)</span>
+<span class="org-string">                  }</span>
+<span class="org-string">                  END {</span>
+<span class="org-string">                    if (len) {</span>
+<span class="org-string">                      print len, name</span>
+<span class="org-string">                    }</span>
+<span class="org-string">                  }</span>
+<span class="org-string">                  '</span> <span class="org-sh-escaped-newline">\</span>
+                      | sort -nr -k1,1 <span class="org-sh-escaped-newline">\</span>
+                             &gt; output/${<span class="org-variable-name">filename</span>}.length
+    <span class="org-keyword">fi</span>
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+Finally we make a mummerplot for each assembly and each chromosome. We are
+going to manually select which assembly scaffolds to display and also manually
+order and orientate them. <code>mummerplot</code> attempts to do the ordering and
+orientation itself but doesn't do a very good job. We want to order the
+scaffolds such that most of the bases in the alignment appear on the
+diagonal. We do this by sorting by the average base position in the alignment
+of each scaffold. We want to orientate the scaffolds such that as much as
+possible is "forwards" (more red than blue in the plots). We do this by
+counting how much of the alignment length is forward and reverse and setting
+the orientation accordingly.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+<span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    <span class="org-keyword">for</span> chr<span class="org-keyword"> in</span> {01..12}; <span class="org-keyword">do</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Doing chr ${chr}..."</span>
+
+        <span class="org-comment-delimiter"># </span><span class="org-comment">find scaffold order and orientation</span>
+        awk <span class="org-string">'$12 == "ST4.03ch'</span>${<span class="org-variable-name">chr</span>}<span class="org-string">'" {print $1,$2,$3,$4,$13;}'</span> <span class="org-sh-escaped-newline">\</span>
+            output/${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.coords <span class="org-sh-escaped-newline">\</span>
+            | sort -n -k1,1 <span class="org-sh-escaped-newline">\</span>
+            | sort -s -k5 <span class="org-sh-escaped-newline">\</span>
+            | awk <span class="org-string">'</span>
+<span class="org-string">BEGIN {</span>
+<span class="org-string">   lastn=""; lastm=0; lastb=0; lastl=0;</span>
+<span class="org-string">}</span>
+<span class="org-string">{</span>
+<span class="org-string">   n=$5; s=$1; e=$2; p=(s+e)/2; b=e-s; l=$4-$3;</span>
+<span class="org-string">   if (lastn=="") {</span>
+<span class="org-string">      lastn=n; lastm=p; lastb=b; lastl=l;</span>
+<span class="org-string">   } else if (lastn!=n) {</span>
+<span class="org-string">      print lastn,int(lastm),lastl</span>
+<span class="org-string">      lastn=n; lastm=p; lastb=b; lastl=l;</span>
+<span class="org-string">   } else {</span>
+<span class="org-string">      lastm=(lastm*lastb+p*b)/(lastb+b); lastb+=b; lastl+=l</span>
+<span class="org-string">   }</span>
+<span class="org-string">}</span>
+<span class="org-string">END {</span>
+<span class="org-string">   print lastn,int(lastm),lastl</span>
+<span class="org-string">}</span>
+<span class="org-string">'</span> <span class="org-sh-escaped-newline">\</span>
+            | sort -k1,1 <span class="org-sh-escaped-newline">\</span>
+                   &gt; <span class="org-sh-escaped-newline">\</span>
+                   output/${<span class="org-variable-name">filename</span>}-chr${<span class="org-variable-name">chr</span>}-contigs-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.scaf-pos-orn
+
+        join -1 1 -2 2 <span class="org-sh-escaped-newline">\</span>
+             output/${<span class="org-variable-name">filename</span>}-chr${<span class="org-variable-name">chr</span>}-contigs-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.scaf-pos-orn <span class="org-sh-escaped-newline">\</span>
+             &lt;(sort -k2,2 output/${<span class="org-variable-name">filename</span>}.length) <span class="org-sh-escaped-newline">\</span>
+            | sort -n -k2,2 <span class="org-sh-escaped-newline">\</span>
+            | awk <span class="org-string">'</span>
+<span class="org-string">{if ($3&gt;0) {</span>
+<span class="org-string">    sign="+"</span>
+<span class="org-string"> } else {</span>
+<span class="org-string">    sign="-"</span>
+<span class="org-string"> }</span>
+<span class="org-string"> printf "%s\t%d\t%s\n", $1, $4, sign;}</span>
+<span class="org-string">'</span> <span class="org-sh-escaped-newline">\</span>
+                  &gt; output/${<span class="org-variable-name">filename</span>}-chr${<span class="org-variable-name">chr</span>}-contigs-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.mumlist
+
+        mummerplot -t png -r ST4.03ch${<span class="org-variable-name">chr</span>} <span class="org-sh-escaped-newline">\</span>
+                   -p output/mummerplot-${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}-${<span class="org-variable-name">chr</span>} <span class="org-sh-escaped-newline">\</span>
+                   output/${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.delta <span class="org-sh-escaped-newline">\</span>
+                   -Q output/${<span class="org-variable-name">filename</span>}-chr${<span class="org-variable-name">chr</span>}-contigs-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}.mumlist
+
+        mv output/mummerplot-${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}-${<span class="org-variable-name">chr</span>}.png figures/
+    <span class="org-keyword">done</span>
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+
+<p>
+For the rest of the paper we ggplot for the plots so we now convert the
+mummerplots to ggplot and plot them. The data is prepared with the following
+script:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/</span><span class="org-keyword">bash</span>
+
+<span class="org-builtin">set</span> -e
+
+<span class="org-keyword">if</span> [[ $<span class="org-variable-name">#</span> -lt 2 ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"usage: mummer2ggplot inputprefix outputdir"</span>
+    <span class="org-keyword">exit</span> 1
+<span class="org-keyword">fi</span>
+
+<span class="org-variable-name">inputprefix</span>=$<span class="org-variable-name">1</span>
+<span class="org-variable-name">outputdir</span>=$<span class="org-variable-name">2</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">make coords</span>
+cat ${<span class="org-variable-name">inputprefix</span>}<span class="org-builtin">.</span>[fr]plot <span class="org-sh-escaped-newline">\</span>
+    | awk <span class="org-string">'/^[1-9]/'</span> <span class="org-sh-escaped-newline">\</span>
+    | awk <span class="org-string">'</span>
+<span class="org-string">NR%2==1 {a=$1;b=$2} </span>
+<span class="org-string">NR%2==0 {if($2&gt;b) {</span>
+<span class="org-string">            print a,b,$1,$2,$3,"+"</span>
+<span class="org-string">        }else{</span>
+<span class="org-string">            print a,b,$1,$2,$3,"-"</span>
+<span class="org-string">        }}'</span> <span class="org-sh-escaped-newline">\</span>
+    | sort -n <span class="org-sh-escaped-newline">\</span>
+           &gt; ${<span class="org-variable-name">inputprefix</span>}.ggplot
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">make ticks</span>
+sed <span class="org-string">':a;N;$!ba;s/\\\n//g'</span> ${<span class="org-variable-name">inputprefix</span>}.gp <span class="org-sh-escaped-newline">\</span>
+    | awk <span class="org-string">'/^set ytics/'</span> <span class="org-sh-escaped-newline">\</span>
+    | sed <span class="org-string">'s/set ytics (  //'</span> <span class="org-sh-escaped-newline">\</span>
+    | sed <span class="org-string">'s/ )//'</span> <span class="org-sh-escaped-newline">\</span>
+    | sed <span class="org-string">'s/,  /\n/g'</span> <span class="org-sh-escaped-newline">\</span>
+    | sed <span class="org-string">'s/ /,/'</span> <span class="org-sh-escaped-newline">\</span>
+    | awk <span class="org-string">'{gsub(/"/, "", $1); print $1,$2;}'</span> <span class="org-sh-escaped-newline">\</span>
+          &gt; ${<span class="org-variable-name">inputprefix</span>}.asmticks
+
+Rscript mummerplot.R ${<span class="org-variable-name">outputdir</span>}/$(<span class="org-sh-quoted-exec">basename</span> ${<span class="org-variable-name">inputprefix</span>}) <span class="org-sh-escaped-newline">\</span>
+        ${<span class="org-variable-name">inputprefix</span>}.ggplot ${<span class="org-variable-name">inputprefix</span>}.asmticks
+</pre>
+</div>
+
+<p>
+Where <code>mummerplot.R</code> is:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-R"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/env Rscript</span>
+
+<span class="org-constant">library</span>(<span class="org-string">"ggplot2"</span>)
+
+args <span class="org-constant">&lt;-</span> commandArgs(<span class="org-type">TRUE</span>)
+
+<span class="org-keyword">if</span> (length(args) &lt; 3) {
+    print(<span class="org-string">"usage: prog output coords ticks"</span>)
+    quit()
+}
+
+output <span class="org-constant">&lt;-</span> args[1]
+coords <span class="org-constant">&lt;-</span> args[2]
+ticks <span class="org-constant">&lt;-</span> args[3]
+
+t <span class="org-constant">&lt;-</span> read.table(coords,
+                col.names=c(<span class="org-string">"x1"</span>, <span class="org-string">"y1"</span>, <span class="org-string">"x2"</span>, <span class="org-string">"y2"</span>, <span class="org-string">"pid"</span>, <span class="org-string">"dir"</span>))
+t$dir <span class="org-constant">&lt;-</span> factor(t$dir, levels=c(<span class="org-string">"+"</span>,<span class="org-string">"-"</span>))
+
+ticks <span class="org-constant">&lt;-</span> read.table(ticks,
+                    sep=<span class="org-string">","</span>,
+                    col.names=c(<span class="org-string">"labels"</span>, <span class="org-string">"breaks"</span>))
+
+p <span class="org-constant">&lt;-</span> ggplot(t, aes(x=x1,xend=x2,y=y1,yend=y2,alpha=pid,colour=dir)) +
+    geom_segment() +
+    geom_point() +
+    geom_point(aes(x2,y2)) +
+    scale_x_continuous(name=<span class="org-string">"Reference"</span>) +
+    scale_y_continuous(name=<span class="org-string">"Assembly"</span>,
+                       breaks=ticks$breaks,
+                       labels=ticks$labels,
+                       minor_breaks=<span class="org-type">NULL</span>) +
+    scale_colour_discrete(guide=<span class="org-type">FALSE</span>) +
+    scale_alpha_continuous(guide=<span class="org-type">FALSE</span>) +
+    theme(axis.text.y=element_text(size=6))
+
+pdf(file=sprintf(<span class="org-string">"%s-gg.pdf"</span>,output), width=7, height=6.5)
+print(p)
+dev.off()
+
+png(file=sprintf(<span class="org-string">"%s-gg.png"</span>,output), width=800, height=800)
+print(p)
+dev.off()
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><span class="section-number-3">6.2</span> Figures</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Convert all the figures to ggplot:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash"><span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    <span class="org-keyword">for</span> chr<span class="org-keyword"> in</span> {01..12}; <span class="org-keyword">do</span>
+        ./mummer2ggplot <span class="org-sh-escaped-newline">\</span>
+            output/mummerplot-${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}-${<span class="org-variable-name">chr</span>} <span class="org-sh-escaped-newline">\</span>
+            figures
+    <span class="org-keyword">done</span>
+<span class="org-keyword">done</span> &lt;&lt;EOF
+<span class="org-sh-heredoc">$table</span>
+<span class="org-sh-heredoc">EOF</span>
+</pre>
+</div>
+
+<p>
+Here is a quick preview of the figures.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-bash"><span class="org-variable-name">IFS</span>=<span class="org-string">','</span>
+<span class="org-keyword">while </span><span class="org-builtin">read</span> name filename; <span class="org-keyword">do</span>
+    montage figures/mummerplot-${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}-??-gg.png <span class="org-sh-escaped-newline">\</span>
+            -geometry 240x240+10+5 -tile 3x4 <span class="org-sh-escaped-newline">\</span>
+            figures/mummerplot-${<span class="org-variable-name">filename</span>}-i${<span class="org-variable-name">i</span>}-l${<span class="org-variable-name">l</span>}-all-gg.png
+    <span class="org-builtin">echo</span> <span class="org-string">"*** ${name}"</span>
+
+    <span class="org-builtin">echo</span> <span class="org-string">"[[file:figures/mummerplot-${filename}-i${i}-l${l}-all.png]]"</span>
+<span class="org-keyword">done</span> &lt;&lt;&lt; <span class="org-string">"$table"</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2-1" class="outline-4">
+<h4 id="sec-6-2-1"><span class="section-number-4">6.2.1</span> Supernova + BioNano</h4>
+<div class="outline-text-4" id="text-6-2-1">
+
+<figure>
+<p><img src="figures/mummerplot-10x-bn-i90-l10000-all-gg.png" class="img-responsive" alt="mummerplot-10x-bn-i90-l10000-all-gg.png">
+</p>
+</figure>
+</div>
+</div>
+<div id="outline-container-sec-6-2-2" class="outline-4">
+<h4 id="sec-6-2-2"><span class="section-number-4">6.2.2</span> Discovar + MP + DT + BioNano</h4>
+<div class="outline-text-4" id="text-6-2-2">
+
+<figure>
+<p><img src="figures/mummerplot-discovar-mp-dt-bn-i90-l10000-all-gg.png" class="img-responsive" alt="mummerplot-discovar-mp-dt-bn-i90-l10000-all-gg.png">
+</p>
+</figure>
+</div>
+</div>
+<div id="outline-container-sec-6-2-3" class="outline-4">
+<h4 id="sec-6-2-3"><span class="section-number-4">6.2.3</span> Falcon + DT + BioNano</h4>
+<div class="outline-text-4" id="text-6-2-3">
+
+<figure>
+<p><img src="figures/mummerplot-falcon-dt-bn-2-i90-l10000-all-gg.png" class="img-responsive" alt="mummerplot-falcon-dt-bn-2-i90-l10000-all-gg.png">
+</p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="col-md-3"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#sec-1">1. Introduction</a></li>
+<li><a href="#sec-2">2. Cumulative content</a>
+<ul class="nav">
+<li><a href="#sec-2-1">2.1. Code</a></li>
+<li><a href="#sec-2-2">2.2. Figures</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. KAT plots</a>
+<ul class="nav">
+<li><a href="#sec-3-1">3.1. Code</a></li>
+<li><a href="#sec-3-2">3.2. Figures</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. BAC with difficult region</a>
+<ul class="nav">
+<li><a href="#sec-4-1">4.1. Contig alignment</a></li>
+<li><a href="#sec-4-2">4.2. Read alignment</a></li>
+<li><a href="#sec-4-3">4.3. GC content and homopolymers</a></li>
+<li><a href="#sec-4-4">4.4. Figure</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">5. Gene content</a></li>
+<li><a href="#sec-6">6. Synteny to <i>S. tuberosum</i></a>
+<ul class="nav">
+<li><a href="#sec-6-1">6.1. Code</a></li>
+<li><a href="#sec-6-2">6.2. Figures</a>
+<ul class="nav">
+<li><a href="#sec-6-2-1">6.2.1. Supernova + BioNano</a></li>
+<li><a href="#sec-6-2-2">6.2.2. Discovar + MP + DT + BioNano</a></li>
+<li><a href="#sec-6-2-3">6.2.3. Falcon + DT + BioNano</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+</div></div></div>
+<footer id="postamble" class="">
+<div><p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-02-11 Sat&gt;</span></span></p>
+<p class="author">Author: George Kettleborough</p>
+<p class="date">Created: 2017-03-09 Thu 10:28</p>
+<p class="creator">Emacs 25.1.2 (Org mode 8.2.10)</p>
+</div>
+</footer>
+</body>
+</html>
